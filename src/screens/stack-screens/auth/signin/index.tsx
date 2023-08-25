@@ -130,7 +130,7 @@ const Signin: FunctionComponent<ScreenProps> = ({navigation}) => {
               </View>
             ))}
             <AppButton
-              onPress={submit}
+              onPress={() => navigation.navigate(routesNames.SIGNUP)}
               text="LOG IN"
               textColor="primary_1"
               buttonColor="secondary_2"

@@ -2,6 +2,8 @@ import React, {FC, FunctionComponent, ReactElement} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import FontAwesome5Pro from 'react-native-vector-icons/FontAwesome5Pro';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -28,7 +30,9 @@ type IconProps = {
     | typeof Octicons
     | typeof Foundation
     | typeof Fontisto
-    | typeof EvilIcons;
+    | typeof EvilIcons
+    | typeof FontAwesome6
+    | typeof FontAwesome5Pro;
   name: string;
   color?: string;
   size?: number;
@@ -72,6 +76,8 @@ export const AppVectorIcons = {
   Foundation,
   EvilIcons,
   Fontisto,
+  FontAwesome6,
+  FontAwesome5Pro,
 };
 
 export default Icon;

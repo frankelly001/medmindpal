@@ -48,9 +48,9 @@ const AuthNavHelper: FunctionComponent<{authType: 'sign_up' | 'sign_in'}> = ({
           color={el.color}
           weight="Regular"
           disabled={!el.routeName}
-          // onPress={() =>
-          //   el.routeName ? navigation.navigate(el.routeName) : null
-          // }
+          onPress={() =>
+            el.routeName ? navigation.navigate(el.routeName) : null
+          }
           style={{marginVertical: 20}}
         />
       ))}

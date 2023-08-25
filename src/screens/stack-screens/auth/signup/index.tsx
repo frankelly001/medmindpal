@@ -11,12 +11,14 @@ import ErrorMessage from '../../../../components/error-message';
 import {screenWidth} from '../../../../config/const';
 import {AuthBG, GoogleIcon} from '../../../../constants/all-svgs';
 import colors from '../../../../constants/colors';
+import {routesNames} from '../../../../constants/routes';
+import {ScreenProps} from '../../../../constants/types';
 import {useFormValidation} from '../../../../hooks/useFormValidation';
 import {sigupVS} from './schema';
 import {signupStyle} from './styles';
 import {signupFields} from './types';
 
-const Signup: FunctionComponent = () => {
+const Signup: FunctionComponent<ScreenProps> = ({navigation}) => {
   const [values, setValues] = useState<{
     [key in signupFields]: string;
   }>({
@@ -140,7 +142,7 @@ const Signup: FunctionComponent = () => {
               </View>
             ))}
             <AppButton
-              onPress={submit}
+              onPress={() => navigation.navigate(routesNames.BOTTOM_TAB)}
               text="LOG IN"
               textColor="primary_1"
               buttonColor="secondary_2"
@@ -157,7 +159,7 @@ const Signup: FunctionComponent = () => {
             />
           </View>
         </View>
-        <AuthNavHelper authType="sign_up" />
+        <AuthNavHelper authType="sign_in" />
       </AppScreen>
     </View>
   );

@@ -130,6 +130,9 @@ export type TEXT_SIZE_TYPE =
   | 34
   | 36;
 
+export const fontFamily = (fontFamily: FONT_FAMILY_TYPES, weight: FONT_TYPES) =>
+  `${fontFamily}-${weight}`;
+
 export type FONT_TYPES =
   | 'Black'
   | 'BlackItalic'
@@ -176,4 +179,17 @@ export type COLOR_TYPES =
   | 'error_1'
   | 'error_2'
   | 'error_3'
-  | 'error_4';
+  | 'error_4'
+  | 'brown_1'
+  | 'yellos_light'
+  | 'grey_light'
+  | 'grey_light_2'
+  | 'grey_light_3'
+  | 'grey_light_4'
+  | 'grey_dark'
+  | 'grey_dark_2'
+  | 'grey_dark_2_tranparent'
+  | 'grey_dark_3'
+  | 'grey_dark_3_tranparent'
+  | 'grey_dark_4'
+  | 'grey_dark_4_tranparent';
