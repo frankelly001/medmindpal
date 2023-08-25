@@ -7,6 +7,9 @@ import EyeSlashIcon from '../../assets/svgs/eye-slash.svg';
 import BannerIcon from '../../assets/svgs/flamenco-uploading.svg';
 import MedTabIcon from '../../assets/svgs/medtab.svg';
 import ArrowDownIcon from '../../assets/svgs/arrow_down.svg';
+import FoodPill1Icon from '../../assets/svgs/foodpill1.svg';
+import FoodPill2Icon from '../../assets/svgs/foodpill2.svg';
+import FoodPill3Icon from '../../assets/svgs/foodpill3.svg';
 
 export {
   BG1,
@@ -18,4 +21,7 @@ export {
   BannerIcon,
   MedTabIcon,
   ArrowDownIcon,
+  FoodPill1Icon,
+  FoodPill2Icon,
+  FoodPill3Icon,
 };

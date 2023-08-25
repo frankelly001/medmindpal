@@ -11,11 +11,14 @@ export const remindersStyles = StyleSheet.create({
 export const cardStyles = StyleSheet.create({
   container: {
     backgroundColor: colors.grey_light_2,
+    borderRadius: 20,
+    marginVertical: 8,
+    overflow: 'hidden',
+  },
+  subContainer1: {
     padding: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 20,
-    marginVertical: 8,
   },
   contentContainer1: {paddingHorizontal: 20, flex: 1},
   contentContainer2: {

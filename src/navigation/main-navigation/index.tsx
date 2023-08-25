@@ -10,14 +10,6 @@ const MainNavigation = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={routesNames.ADD_REMINDER}
-        component={AddReminder}
-        options={{
-          headerShown: true,
-          title: 'Create Reminder',
-        }}
-      />
-      <Stack.Screen
         name={routesNames.AUTH_STACK}
         component={AuthStack}
         options={{
@@ -29,6 +21,14 @@ const MainNavigation = () => {
         component={BottomTab}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name={routesNames.ADD_REMINDER}
+        component={AddReminder}
+        options={{
+          headerShown: true,
+          title: 'Create Reminder',
         }}
       />
       <Stack.Screen

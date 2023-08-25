@@ -30,7 +30,7 @@ export const useFormValidation = (validationSchema: AnyObjectSchema) => {
     return fieldsError;
   };
 
-  const isValid = async (values: {[key: string]: string}) => {
+  const isValid = async (values: {[key: string]: any}) => {
     const errs = await validate(validationSchema, values);
     setErrors(errs);
     return !errs;

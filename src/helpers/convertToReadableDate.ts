@@ -1,9 +1,12 @@
-import dayjs, {ConfigType} from 'dayjs';
+import dayjs from 'dayjs';
+import uuid from 'react-native-uuid';
 
-export const convertToReadableDate = (date: ConfigType) =>
-  dayjs(date).format('DD MMM YYYY');
-
-export const formatDate = (dateString: string) => {
-  const formattedDate = dayjs(dateString).format('YYYY-MM-DD');
-  return formattedDate;
+export const convertToReadableTime = (time: any) => {
+  var timestamp = new Date(time).getTime();
+  var formatedTime = new Date(timestamp);
+  return formatedTime.toLocaleTimeString('fr');
 };
+
+export const convertToTime = (date: any) => dayjs(date).format('h:mm A');
+
+export const generateUniqueId = () => uuid.v4();

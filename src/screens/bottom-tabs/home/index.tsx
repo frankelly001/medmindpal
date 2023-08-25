@@ -58,7 +58,7 @@ const WelcomeCard: FunctionComponent = () => {
 const DailyTabCard = () => {
   return (
     <View style={cardStyles.container}>
-      <MedTabIcon />
+      <MedTabIcon fill={colors.text_2} />
       <View style={cardStyles.contentContainer1}>
         <AppText
           text={'Oxycodane'}

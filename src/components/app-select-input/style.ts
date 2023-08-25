@@ -49,7 +49,6 @@ export const selectInputStyles = StyleSheet.create({
   },
   textItem: {
     flex: 1,
-
     textTransform: 'capitalize',
     color: colors.black,
     fontFamily: fontFamily('Poppins', 'Medium'),

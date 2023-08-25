@@ -8,21 +8,22 @@ import {DinputType} from './type';
 import {fontSz} from '../../config/const';
 import colors from '../../constants/colors';
 import {ArrowDownIcon} from '../../constants/all-svgs';
+import Icon, {AppVectorIcons} from '../app-icons';
 
 const AppSelectInput: FunctionComponent<DinputType<any>> = ({
   editable,
   placeHolder = 'Placeholder Title',
-  LeftView: suffixIcon = <ArrowDownIcon stroke="#9CA3AF" />,
   iconPressable,
   iconOnPress,
   onChange,
-  value,
+  value = '',
+  placeholder,
   TextInputStyle,
   enableSearchInput,
   contentContainerStyle,
-  placeHolderColor = colors.text_1,
+  placeHolderColor = colors.black,
   inputFontSize = 16,
-  placeHolderFontSize = 14,
+  placeHolderFontSize = 12,
   onFocus,
   onBlur,
   labelField = 'label',
@@ -35,8 +36,9 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
 
   const focusedInputfontSize = fontSz(placeHolderFontSize / 1.17);
   const unfocusedInputfontSize = fontSz(placeHolderFontSize);
+  const placeHolderTitle = placeHolder;
 
-  const onShow = isFocus || value.trim();
+  const onShow = isFocus || value?.trim();
   const placeholderStyle = useAnimatedStyle(() => {
     if (onShow)
       return {
@@ -56,6 +58,7 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
       style={[
         {
           ...selectInputStyles.container,
+          borderColor: colors[isFocus ? 'grey_dark_4' : 'grey_light_4'],
         },
         contentContainerStyle,
       ]}
@@ -67,14 +70,14 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
       <Animated.Text
         style={[
           {
-            ...selectInputStyles.fontFamily,
             paddingHorizontal: 16,
             color: placeHolderColor,
-            ...(suffixIcon && {paddingRight: 30}),
+            paddingRight: 30,
+            textTransform: 'capitalize',
           },
           placeholderStyle,
         ]}>
-        {placeHolder}
+        {placeHolderTitle}
       </Animated.Text>
       <Dropdown
         ref={selectInputRef}
@@ -85,7 +88,7 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
         ]}
         selectedTextStyle={[
           selectInputStyles.selectedTextStyle,
-          {opacity: value.trim() ? 1 : 0},
+          {opacity: value?.trim() ? 1 : 0},
         ]}
         value={value}
         onChange={({value}) => onChange(value)}
@@ -93,10 +96,20 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
         iconStyle={selectInputStyles.iconStyle}
         search={enableSearchInput}
         maxHeight={300}
+        showsVerticalScrollIndicator={false}
         containerStyle={{
           borderRadius: 10,
           overflow: 'hidden',
-          backgroundColor: colors.input,
+          backgroundColor: colors.white,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 6,
+          },
+          shadowOpacity: 0.37,
+          shadowRadius: 7.49,
+
+          elevation: 12,
         }}
         onBlur={() => {
           isFocus && setIsFocus(false);
@@ -106,10 +119,10 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
           !isFocus && setIsFocus(true);
           onFocus;
         }}
-        placeholder={`Select ${placeHolder}`}
-        searchPlaceholder={`Search ${placeHolder}...`}
-        labelField={labelField}
-        valueField={valueField}
+        placeholder={`Select`}
+        searchPlaceholder={`Search ${placeHolderTitle}...`}
+        labelField={'label'}
+        valueField={'value'}
         {...otherProps}
         renderItem={(item: {label: string; value: string}) => {
           return (
@@ -118,7 +131,7 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
                 style={[
                   selectInputStyles.textItem,
                   !item.value && {
-                    color: colors.error_2,
+                    color: colors.error_1,
                     textTransform: 'none',
                   },
                 ]}>
@@ -127,7 +140,7 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
               {item.value === value && (
                 <AntDesign
                   style={selectInputStyles.icon}
-                  color={colors.text_1}
+                  color={colors.grey_dark_4}
                   name="Safety"
                   size={20}
                 />
@@ -137,7 +150,14 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
         }}
       />
 
-      <View style={selectInputStyles.iconPosition}>{suffixIcon}</View>
+      <View style={selectInputStyles.iconPosition}>
+        <Icon
+          IconTag={AppVectorIcons.SimpleLineIcons}
+          name="arrow-down"
+          size={13}
+          color={colors.black}
+        />
+      </View>
     </TouchableOpacity>
   );
 };

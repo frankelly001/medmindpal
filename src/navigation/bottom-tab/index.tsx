@@ -59,8 +59,7 @@ const BottomTab = () => {
         component={Home}
         options={{
           title: 'Profile',
-          //   headerTitle: 'Live Voting',
-          headerShown: false,
+
           tabBarIcon: ({color, size}) => (
             <Icon
               IconTag={AppVectorIcons.MaterialIcons}
