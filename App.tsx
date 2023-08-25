@@ -24,6 +24,13 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {useSelector} from 'react-redux';
+import {globalStoreSliceState} from './src/redux/global-store/type';
+import {storeSliceType} from './src/redux/storeSliceType';
+import {NavigationContainer} from '@react-navigation/native';
+import {navigationTheme} from './src/navigation/theme';
+import {navigationRef} from './src/navigation/rootNavigation';
+import MainNavigation from './src/navigation/main-navigation';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -57,42 +64,22 @@ function Section({children, title}: SectionProps): JSX.Element {
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+  const {user} = useSelector(
+    (state: storeSliceType) => state.globalStoreReducer,
+  );
+
+  console.log(user);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer theme={navigationTheme} ref={navigationRef}>
+      {/* <SafeAreaView style={{flex: 1}}> */}
+      <MainNavigation />
+      {/* </SafeAreaView> */}
+    </NavigationContainer>
   );
 }
 
