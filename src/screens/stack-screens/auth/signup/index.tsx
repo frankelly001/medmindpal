@@ -8,28 +8,40 @@ import AppScreen from '../../../../components/app-screen';
 import AppText from '../../../../components/app-text';
 import AuthNavHelper from '../../../../components/auth-nav-helper';
 import ErrorMessage from '../../../../components/error-message';
-import {COLOR_TYPES, screenHeight, screenWidth} from '../../../../config/const';
+import {screenWidth} from '../../../../config/const';
 import {AuthBG, GoogleIcon} from '../../../../constants/all-svgs';
 import colors from '../../../../constants/colors';
-import {routesNames} from '../../../../constants/routes';
-import {ScreenProps} from '../../../../constants/types';
 import {useFormValidation} from '../../../../hooks/useFormValidation';
-import {siginVS} from './schema';
-import {signinStyle} from './styles';
-import {signinFields} from './types';
+import {sigupVS} from './schema';
+import {signupStyle} from './styles';
+import {signupFields} from './types';
 
-const Signin: FunctionComponent<ScreenProps> = ({navigation}) => {
-  const [values, setValues] = useState<{[key in signinFields]: string}>({
+const Signup: FunctionComponent = () => {
+  const [values, setValues] = useState<{
+    [key in signupFields]: string;
+  }>({
+    fullname: '',
     email: '',
     password: '',
+    confrimPassword: '',
   });
 
-  const fields: {[key in 'name']: signinFields}[] = [
+  const fields: {
+    name: signupFields;
+    textContentType?: 'password';
+    placeholder?: string;
+  }[] = [
+    {name: 'fullname'},
     {name: 'email'},
-    {name: 'password'},
+    {name: 'password', textContentType: 'password'},
+    {
+      name: 'confrimPassword',
+      placeholder: 'Confrim Password',
+      textContentType: 'password',
+    },
   ];
 
-  const {errors, isValid, validateField} = useFormValidation(siginVS);
+  const {errors, isValid, validateField} = useFormValidation(sigupVS);
   const [loading, setLoading] = useState(false);
 
   const handleChange = async (text: string, name: string) => {
@@ -50,7 +62,6 @@ const Signin: FunctionComponent<ScreenProps> = ({navigation}) => {
       if (!valid) return Alert.alert('E no Valid');
       setLoading(true);
       Alert.alert('Success');
-      navigation.navigate(routesNames.SIGNUP);
       // const data: any = await getVoter(
       //   convertStringKeyValuesToLowercase(values),
       // );
@@ -69,18 +80,16 @@ const Signin: FunctionComponent<ScreenProps> = ({navigation}) => {
     }
   };
 
-  console.log(errors);
-
   return (
-    <View style={signinStyle.container}>
-      <View style={signinStyle.svgBg}>
+    <View style={signupStyle.container}>
+      <View style={signupStyle.svgBg}>
         <AuthBG width={screenWidth} />
       </View>
-      <AppScreen style={signinStyle.safeArea}>
-        <View style={signinStyle.contentContainer}>
+      <AppScreen style={signupStyle.safeArea}>
+        <View style={signupStyle.contentContainer}>
           <AppBackBtn />
           <AppText
-            text={'Welcome Back'}
+            text={'Create your account'}
             size={30}
             color="text_1"
             weight="Medium"
@@ -108,7 +117,7 @@ const Signin: FunctionComponent<ScreenProps> = ({navigation}) => {
             }}
           />
           <AppText
-            text={'OR LOG IN WITH EMAIL'}
+            text={'OR SIGN UP WITH EMAIL'}
             align="center"
             size={14}
             weight="SemiBold"
@@ -121,7 +130,8 @@ const Signin: FunctionComponent<ScreenProps> = ({navigation}) => {
                 <AppInput
                   value={values[el.name]}
                   onChangeText={(text: string) => handleChange(text, el.name)}
-                  placeHolder={el.name}
+                  placeHolder={el?.placeholder ?? el.name}
+                  textContentType={el.textContentType}
                 />
                 <ErrorMessage
                   error={!!errors?.[el.name]}
@@ -153,4 +163,4 @@ const Signin: FunctionComponent<ScreenProps> = ({navigation}) => {
   );
 };
 
-export default Signin;
+export default Signup;

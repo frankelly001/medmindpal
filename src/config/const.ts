@@ -164,4 +164,16 @@ export type COLOR_TYPES =
   | 'text_2'
   | 'primary_1'
   | 'secondary_1'
-  | 'secondary_2';
+  | 'secondary_2'
+  | 'input'
+  | 'sucess_1'
+  | 'sucess_2'
+  | 'sucess_3'
+  | 'warning_1'
+  | 'warning_2'
+  | 'warning_3'
+  | 'gold'
+  | 'error_1'
+  | 'error_2'
+  | 'error_3'
+  | 'error_4';

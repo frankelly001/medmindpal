@@ -6,9 +6,11 @@ import AppScreen from '../../../components/app-screen';
 import AppText from '../../../components/app-text';
 import {screenHeight, screenWidth} from '../../../config/const';
 import {BG1} from '../../../constants/all-svgs';
+import {routesNames} from '../../../constants/routes';
+import {ScreenProps} from '../../../constants/types';
 import {onboardingStyle} from './styles';
 
-const Onboarding: FunctionComponent = () => {
+const Onboarding: FunctionComponent<ScreenProps> = ({navigation}) => {
   return (
     <View style={onboardingStyle.container}>
       <View style={onboardingStyle.svgBg}>
@@ -42,7 +44,10 @@ const Onboarding: FunctionComponent = () => {
               align="center"
             />
           </View>
-          <AppButton text="GET STARTED" />
+          <AppButton
+            text="GET STARTED"
+            onPress={() => navigation.replace(routesNames.AUTH_TYPE)}
+          />
         </View>
       </SafeAreaView>
     </View>

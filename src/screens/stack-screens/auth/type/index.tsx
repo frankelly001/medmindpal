@@ -5,9 +5,11 @@ import AppText from '../../../../components/app-text';
 import AuthNavHelper from '../../../../components/auth-nav-helper';
 import {COLOR_TYPES, screenHeight, screenWidth} from '../../../../config/const';
 import {BG2} from '../../../../constants/all-svgs';
+import {routesNames} from '../../../../constants/routes';
+import {ScreenProps} from '../../../../constants/types';
 import {authTypeStyle} from './styles';
 
-const AuthType: FunctionComponent = () => {
+const AuthType: FunctionComponent<ScreenProps> = ({navigation}) => {
   return (
     <View style={authTypeStyle.container}>
       <View style={authTypeStyle.svgBg}>
@@ -37,6 +39,7 @@ const AuthType: FunctionComponent = () => {
             text="SIGN IN"
             textColor="primary_1"
             buttonColor="secondary_1"
+            onPress={() => navigation.navigate(routesNames.SIGNIN)}
           />
 
           <AuthNavHelper authType="sign_in" />

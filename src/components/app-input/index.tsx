@@ -23,7 +23,7 @@ type inputType = {
   iconOnPress?: () => void;
   placeHolder: string;
   value: string;
-  onChangeText?: any;
+  onChangeText?: (text: string) => void;
   contentContainerStyle?: ViewStyle;
   TextInputStyle?: ViewStyle;
   inputFontSize?: TEXT_SIZE_TYPE;
@@ -88,8 +88,8 @@ const AppInput: FunctionComponent<inputType> = ({
       style={[
         {
           ...inputStyles.container,
-          borderColor: isFocus ? colors['grey_dark_4'] : borderColor,
-          borderWidth: borderWidth,
+          //   borderColor: isFocus ? colors['grey_dark_4'] : borderColor,
+          //   borderWidth: borderWidth,
           opacity: editable ? 1 : 0.5,
         },
         contentContainerStyle,
@@ -195,8 +195,9 @@ const inputStyles = StyleSheet.create({
     height: hp(65),
     paddingVertical: 8,
     paddingHorizontal: 16,
-    borderRadius: 12,
+    borderRadius: 15,
     justifyContent: 'center',
+    backgroundColor: colors.input,
   },
   textInput: {
     paddingVertical: 0,

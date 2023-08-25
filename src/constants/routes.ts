@@ -1,6 +1,7 @@
 export const routesNames = {
   HOME: 'HOME',
   AUTH_STACK: 'AUTH_STACK',
+  AUTH_TYPE: 'AUTH_TYPE',
   ONBOARDING: 'ONBOARDING',
   SIGNUP: 'SIGNUP',
   SIGNIN: 'SIGNIN',
