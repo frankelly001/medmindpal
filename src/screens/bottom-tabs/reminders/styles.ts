@@ -20,7 +20,7 @@ export const cardStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  contentContainer1: {paddingHorizontal: 20, flex: 1},
+  contentContainer1: {paddingRight: 20, flex: 1},
   contentContainer2: {
     flexDirection: 'row',
     alignItems: 'center',

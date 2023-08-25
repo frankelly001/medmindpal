@@ -1,6 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {routesNames} from '../../constants/routes';
 import AddReminder from '../../screens/stack-screens/add-reminder';
+import EditReminder from '../../screens/stack-screens/edit-reminder';
 import AuthStack from '../auth-stack';
 import BottomTab from '../bottom-tab';
 
@@ -27,15 +28,14 @@ const MainNavigation = () => {
         name={routesNames.ADD_REMINDER}
         component={AddReminder}
         options={{
-          headerShown: true,
           title: 'Create Reminder',
         }}
       />
       <Stack.Screen
         name={routesNames.EDIT_REMINDER}
-        component={BottomTab}
+        component={EditReminder}
         options={{
-          headerShown: false,
+          title: 'Edit Reminder',
         }}
       />
     </Stack.Navigator>

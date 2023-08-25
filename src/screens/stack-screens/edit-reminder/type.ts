@@ -9,7 +9,7 @@ export type FoodPillTimePickerProps = {
   align?: 'left' | 'center' | 'right';
 };
 
-export type addReminderFields =
+export type editReminderFields =
   | 'pillName'
   | 'dosage'
   | 'frequency'

@@ -2,7 +2,7 @@ import {FunctionComponent, useState} from 'react';
 import {Controller} from 'react-hook-form';
 import {View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {convertToReadableDate} from '../../helpers/convertToReadableDate';
+import {convertToTime} from '../../helpers/convertToReadableDate';
 import AppBtnInput from '../app-btn-input';
 import ErrorMessage from '../error-message';
 import {AppDatePickerProps} from './type';
@@ -25,7 +25,7 @@ const AppDatePicker: FunctionComponent<AppDatePickerProps> = ({
         }}>
         <AppBtnInput
           label={placeholder}
-          value={date ? convertToReadableDate(date) : undefined}
+          value={date ? convertToTime(date) : undefined}
           labelFontSize={12}
           onPress={() => setOpen(true)}
         />

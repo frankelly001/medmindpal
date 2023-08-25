@@ -18,7 +18,7 @@ const AuthType: FunctionComponent<ScreenProps> = ({navigation}) => {
       <SafeAreaView style={authTypeStyle.safeArea}>
         <View style={authTypeStyle.contentContainer}>
           <AppText
-            text={'We are what we do'}
+            text={'Your Personal Medication Companion'}
             size={30}
             color="text_1"
             weight="Medium"
@@ -26,7 +26,7 @@ const AuthType: FunctionComponent<ScreenProps> = ({navigation}) => {
           />
           <AppText
             text={
-              'Thousand of people are using medmindpal for meditation reminder'
+              'Thousand of people are using medmindpal for medication reminder'
             }
             size={16}
             color="text_2"
@@ -42,7 +42,7 @@ const AuthType: FunctionComponent<ScreenProps> = ({navigation}) => {
             onPress={() => navigation.navigate(routesNames.SIGNIN)}
           />
 
-          <AuthNavHelper authType="sign_in" />
+          <AuthNavHelper authType="sign_up" />
         </View>
       </SafeAreaView>
     </View>

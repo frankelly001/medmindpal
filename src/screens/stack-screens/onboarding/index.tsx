@@ -36,7 +36,7 @@ const Onboarding: FunctionComponent<ScreenProps> = ({navigation}) => {
             />
             <AppText
               text={
-                'Explore the app, Find some peace of mind to prepare for meditation.'
+                'Never Miss a pill again. Staying on top of your health routine is our priority'
               }
               size={16}
               color="primary_1"

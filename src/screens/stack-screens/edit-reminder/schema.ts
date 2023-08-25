@@ -1,8 +1,7 @@
 import {schema, validationSchema} from '../../../helpers/schema';
 
-export const addReminderVS = validationSchema({
+export const editReminderVS = validationSchema({
   pillName: schema.pillName,
   dosage: schema.dosage,
-  days: schema.days,
   timeOfDay: schema.timeOfDay,
 });

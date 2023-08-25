@@ -1,5 +1,6 @@
-import {FunctionComponent} from 'react';
+import {FunctionComponent, useState} from 'react';
 import {Alert, FlatList, TouchableOpacity, View} from 'react-native';
+import DeleteNotice from '../../../components/app-delete-notice/Index';
 import Icon, {AppVectorIcons} from '../../../components/app-icons';
 import AppScreen from '../../../components/app-screen';
 import AppText from '../../../components/app-text';
@@ -45,7 +46,6 @@ const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
   return (
     <View style={cardStyles.container}>
       <View style={cardStyles.subContainer1}>
-        <MedTabIcon fill={colors.secondary_1} />
         <View style={cardStyles.contentContainer1}>
           <AppText text={pillName} weight="SemiBold" size={18} color="text_1" />
           {timeOfDay.map(item => (
@@ -72,7 +72,7 @@ const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
             </View>
           ))}
         </View>
-        <View style={{height: '100%'}}>
+        {/* <View style={{height: '100%'}}>
           <View
             style={{
               flex: 1,
@@ -92,45 +92,28 @@ const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
               color="grey_dark"
             />
           </View>
+        </View> */}
+        <View style={{height: '100%'}}>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'space-between',
+              alignItems: 'flex-end',
+            }}>
+            <MedTabIcon fill={colors.secondary_1} />
+            <AppText
+              text={`${dosage} pills`}
+              weight="SemiBold"
+              size={13}
+              color="grey_dark"
+            />
+          </View>
         </View>
       </View>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'row',
-          marginHorizontal: 20,
-          justifyContent: 'space-between',
-          borderTopWidth: 1,
-          borderColor: colors.primary_1,
-          paddingVertical: 10,
-        }}>
-        {[
-          {title: 'Started', value: '20 May 2023'},
-          {title: 'Ending', value: '20 June 2023'},
-        ].map(el => (
-          <AppText
-            text={[
-              <AppText
-                key={0}
-                text={`${el.title}:  `}
-                weight="SemiBold"
-                size={11}
-                textTransform="capitalize"
-                color="black"
-              />,
-              <AppText
-                key={1}
-                text={el.value}
-                weight="SemiBold"
-                size={11}
-                color="grey_dark"
-              />,
-            ]}
-          />
-        ))}
-      </View>
+
       <View style={{flex: 1, flexDirection: 'row'}}>
         <TouchableOpacity
+          onPress={onEditPress}
           style={{
             flex: 1,
             backgroundColor: colors.secondary_1_light,
@@ -147,6 +130,7 @@ const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
         </TouchableOpacity>
         <View style={{width: 1}} />
         <TouchableOpacity
+          onPress={onDeletePress}
           style={{
             flex: 1,
             backgroundColor: colors.secondary_1_light,
@@ -167,14 +151,52 @@ const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
 };
 
 const Reminders: FunctionComponent<ScreenProps> = ({navigation}) => {
+  const [showDeleteNotice, setShowsDeleteNotice] = useState(false);
   return (
     <View style={{flex: 1, paddingHorizontal: 20}}>
+      <DeleteNotice
+        noticeLabel={[
+          <AppText
+            key={0}
+            text={'Are you sure, you want to delete Voter: '}
+            size={14}
+            style={{textAlign: 'center', marginBottom: 5}}
+          />,
+          <AppText
+            key={1}
+            text={`Paracetamol`}
+            textTransform="capitalize"
+            size={14}
+            weight={'Medium'}
+            style={{textAlign: 'center', marginBottom: 5}}
+          />,
+          <AppText
+            key={2}
+            text={'?'}
+            size={14}
+            style={{textAlign: 'center', marginBottom: 5}}
+          />,
+        ]}
+        visible={showDeleteNotice}
+        onCancel={() => {
+          setShowsDeleteNotice(false);
+        }}
+        onDelete={() => {
+          Alert.alert('Deleted successsfully');
+          setShowsDeleteNotice(false);
+        }}
+      />
       <FlatList
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{paddingTop: 20, paddingBottom: 100}}
         data={[1, 2, 3, 4]}
         keyExtractor={el => el.toString()}
-        renderItem={({item}) => <DailyTabCard />}
+        renderItem={({item}) => (
+          <DailyTabCard
+            onDeletePress={() => setShowsDeleteNotice(true)}
+            onEditPress={() => navigation.navigate(routesNames.EDIT_REMINDER)}
+          />
+        )}
       />
       <TouchableOpacity
         onPress={() => navigation.navigate(routesNames.ADD_REMINDER)}
@@ -190,7 +212,7 @@ const Reminders: FunctionComponent<ScreenProps> = ({navigation}) => {
           IconTag={AppVectorIcons.Fontisto}
           name="plus-a"
           color={colors.white}
-          // size={30}
+          size={24}
         />
       </TouchableOpacity>
     </View>

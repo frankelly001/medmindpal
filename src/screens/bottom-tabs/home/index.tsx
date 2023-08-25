@@ -1,11 +1,5 @@
 import {FunctionComponent} from 'react';
-import {
-  Alert,
-  FlatList,
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Alert, TouchableOpacity, View} from 'react-native';
 import Icon, {AppVectorIcons} from '../../../components/app-icons';
 import AppScreen from '../../../components/app-screen';
 import AppText from '../../../components/app-text';

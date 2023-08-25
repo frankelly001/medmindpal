@@ -19,8 +19,8 @@ import colors from '../../../constants/colors';
 import {ScreenProps} from '../../../constants/types';
 import {convertToTime} from '../../../helpers/convertToReadableDate';
 import {useFormValidation} from '../../../hooks/useFormValidation';
-import {addReminderVS} from './schema';
-import {addReminderFields, FoodPillTimePickerProps} from './type';
+import {editReminderVS} from './schema';
+import {editReminderFields, FoodPillTimePickerProps} from './type';
 
 function createArrayNumList(length: number = 5, addBy: number = 1) {
   return Array.from({length}, (_, index) => index + addBy).map(el => {
@@ -58,7 +58,6 @@ const FoodPillTimePicker: FunctionComponent<FoodPillTimePickerProps> = ({
     <>
       <View
         style={{
-          // width: '30%',
           alignItems: 'center',
           margin: 5,
         }}>
@@ -141,12 +140,10 @@ const EditReminder: FunctionComponent<ScreenProps> = ({navigation}) => {
   const [values, setValues] = useState<{
     pillName: string;
     dosage: string;
-    frequency: string;
     timeOfDay: {name: 'morning' | 'noon' | 'night'; value: Date}[];
   }>({
     pillName: '',
     dosage: '',
-    frequency: '',
     timeOfDay: [],
   });
 
@@ -157,10 +154,10 @@ const EditReminder: FunctionComponent<ScreenProps> = ({navigation}) => {
   } = {name: 'pillName', placeholder: 'Pill name'};
 
   const field2: {
-    name: addReminderFields;
+    name: 'dosage';
     textContentType?: 'password';
     placeholder?: string;
-  }[] = [{name: 'dosage', placeholder: 'Dosage(mg)'}, {name: 'frequency'}];
+  } = {name: 'dosage'};
 
   const field3: {
     name: 'morning' | 'noon' | 'night';
@@ -173,10 +170,10 @@ const EditReminder: FunctionComponent<ScreenProps> = ({navigation}) => {
     {name: 'night', align: 'right'},
   ];
 
-  const {errors, isValid, validateField} = useFormValidation(addReminderVS);
+  const {errors, isValid, validateField} = useFormValidation(editReminderVS);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = async (text: any, name: addReminderFields) => {
+  const handleChange = async (text: any, name: editReminderFields) => {
     setValues(values => {
       return {...values, [name]: text};
     });
@@ -241,18 +238,16 @@ const EditReminder: FunctionComponent<ScreenProps> = ({navigation}) => {
             style={{marginBottom: 10, marginHorizontal: 10}}
           />
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            {field2.map(item => (
-              <View key={item.name} style={{margin: 5, flex: 1}}>
-                <AppSelectInput
-                  placeHolder={item?.placeholder ?? item.name}
-                  value={values[item.name]}
-                  data={createArrayNumList(10, 1)}
-                  labelField={'lebel'}
-                  valueField={'value'}
-                  onChange={text => handleChange(text, item.name)}
-                />
-              </View>
-            ))}
+            <View key={field2.name} style={{margin: 5, flex: 1}}>
+              <AppSelectInput
+                placeHolder={field2?.placeholder ?? field2.name}
+                value={values[field2.name]}
+                data={createArrayNumList(10, 1)}
+                labelField={'lebel'}
+                valueField={'value'}
+                onChange={text => handleChange(text, field2.name)}
+              />
+            </View>
           </View>
         </View>
         <View style={{marginVertical: 10}}>
