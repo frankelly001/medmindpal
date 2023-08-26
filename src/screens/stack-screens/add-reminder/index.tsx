@@ -66,6 +66,7 @@ const FoodPillTimePicker: FunctionComponent<FoodPillTimePickerProps> = ({
           style={{
             backgroundColor: colors.input,
             padding: 20,
+
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: 20,
@@ -75,7 +76,7 @@ const FoodPillTimePicker: FunctionComponent<FoodPillTimePickerProps> = ({
           }}>
           <FoodPillIcon
             fill={date ? colors.secondary_1 : colors.text_2}
-            height={48}
+            height={wp(48)}
           />
         </TouchableOpacity>
         {date && (
@@ -211,7 +212,7 @@ const AddReminder: FunctionComponent<ScreenProps> = ({navigation}) => {
 
   return (
     <AppScreen>
-      <View style={{padding: 15}}>
+      <View style={{padding: 16}}>
         {/* <AppText text={'Add Plan'} weight="SemiBold" size={28} color="text_1" /> */}
         <View style={{marginVertical: 20}}>
           <AppText
@@ -221,13 +222,13 @@ const AddReminder: FunctionComponent<ScreenProps> = ({navigation}) => {
             color="text_1"
             style={{marginBottom: 10, marginHorizontal: 10}}
           />
-
-          <AppInput
-            placeHolder={field1.placeholder}
-            value={values[field1.name]}
-            onChangeText={text => handleChange(text, field1.name)}
-            contentContainerStyle={{margin: 5}}
-          />
+          <View key={field2.name} style={{margin: 5, flex: 1}}>
+            <AppInput
+              placeHolder={field1.placeholder}
+              value={values[field1.name]}
+              onChangeText={text => handleChange(text, field1.name)}
+            />
+          </View>
         </View>
         <View style={{marginVertical: 10}}>
           <AppText
@@ -237,17 +238,16 @@ const AddReminder: FunctionComponent<ScreenProps> = ({navigation}) => {
             color="text_1"
             style={{marginBottom: 10, marginHorizontal: 10}}
           />
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <View key={field2.name} style={{margin: 5, flex: 1}}>
-              <AppSelectInput
-                placeHolder={field2?.placeholder ?? field2.name}
-                value={values[field2.name]}
-                data={createArrayNumList(10, 1)}
-                labelField={'lebel'}
-                valueField={'value'}
-                onChange={text => handleChange(text, field2.name)}
-              />
-            </View>
+
+          <View key={field2.name} style={{margin: 5, flex: 1}}>
+            <AppSelectInput
+              placeHolder={field2?.placeholder ?? field2.name}
+              value={values[field2.name]}
+              data={createArrayNumList(10, 1)}
+              labelField={'lebel'}
+              valueField={'value'}
+              onChange={text => handleChange(text, field2.name)}
+            />
           </View>
         </View>
         <View style={{marginVertical: 10}}>
@@ -261,8 +261,8 @@ const AddReminder: FunctionComponent<ScreenProps> = ({navigation}) => {
           <View
             style={{
               flexDirection: 'row',
-              // alignItems: 'center',
               justifyContent: 'space-between',
+              flex: 1,
             }}>
             {field3.map(item => (
               <FoodPillTimePicker

@@ -7,9 +7,9 @@ import EyeSlashIcon from '../../assets/svgs/eye-slash.svg';
 import BannerIcon from '../../assets/svgs/flamenco-uploading.svg';
 import MedTabIcon from '../../assets/svgs/medtab.svg';
 import ArrowDownIcon from '../../assets/svgs/arrow_down.svg';
-import FoodPill1Icon from '../../assets/svgs/foodpill1.svg';
-import FoodPill2Icon from '../../assets/svgs/foodpill2.svg';
-import FoodPill3Icon from '../../assets/svgs/foodpill3.svg';
+import FoodPill1Icon from '../../assets/svgs/food_pill1.svg';
+import FoodPill2Icon from '../../assets/svgs/food_pill2.svg';
+import FoodPill3Icon from '../../assets/svgs/food_pill3.svg';
 
 export {
   BG1,

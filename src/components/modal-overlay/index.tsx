@@ -1,14 +1,9 @@
 import React, {FunctionComponent, ReactNode} from 'react';
-import {StyleSheet, View, ViewStyle} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {Portal} from 'react-native-portalize';
 import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 import colors from '../../constants/colors';
-
-type ModalOverlayProps = {
-  visible?: boolean;
-  children?: ReactNode;
-  modalStyle?: ViewStyle;
-};
+import {ModalOverlayProps} from './type';
 
 const ModalOverlay: FunctionComponent<ModalOverlayProps> = ({
   visible,
@@ -22,11 +17,9 @@ const ModalOverlay: FunctionComponent<ModalOverlayProps> = ({
 
   return (
     <Portal>
-      {/* <Modal transparent animationType="fade" visible={visible}> */}
       <Animated.View style={[styles.overlay, modalStyle, mpdalViewStyle]}>
         {children}
       </Animated.View>
-      {/* </Modal> */}
     </Portal>
   );
 };

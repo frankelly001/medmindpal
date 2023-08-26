@@ -7,7 +7,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {DinputType} from './type';
 import {fontSz} from '../../config/const';
 import colors from '../../constants/colors';
-import {ArrowDownIcon} from '../../constants/all-svgs';
 import Icon, {AppVectorIcons} from '../app-icons';
 
 const AppSelectInput: FunctionComponent<DinputType<any>> = ({
@@ -130,10 +129,7 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
               <Text
                 style={[
                   selectInputStyles.textItem,
-                  !item.value && {
-                    color: colors.error_1,
-                    textTransform: 'none',
-                  },
+                  !item.value && selectInputStyles.noValueText,
                 ]}>
                 {item.label}
               </Text>

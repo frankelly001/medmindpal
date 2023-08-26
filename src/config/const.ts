@@ -161,8 +161,6 @@ export type COLOR_TYPES =
   | 'green'
   | 'yellow'
   | 'orange'
-  | 'red_light'
-  | 'red_dark'
   | 'text_1'
   | 'text_2'
   | 'primary_1'

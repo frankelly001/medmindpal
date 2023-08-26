@@ -20,7 +20,7 @@ const WelcomeCard: FunctionComponent = () => {
               text={'Your Plan for today'}
               weight="SemiBold"
               size={18}
-              style={{marginBottom: 10}}
+              style={homestyles.mb10}
             />
 
             <AppText text={'1 of 4 Completed'} weight="Regular" size={12} />
@@ -34,13 +34,8 @@ const WelcomeCard: FunctionComponent = () => {
             />
           </TouchableOpacity>
         </View>
-        <View style={{width: '70%'}}>
-          <View
-            style={{
-              position: 'absolute',
-              right: -60,
-              bottom: 0,
-            }}>
+        <View style={homestyles.bannerContainer}>
+          <View style={homestyles.bannerSubContainer}>
             <BannerIcon width={wp(230)} height={wp(230)} />
           </View>
         </View>
@@ -92,14 +87,7 @@ const Home: FunctionComponent = () => {
       <View style={homestyles.container}>
         <WelcomeCard />
 
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: 20,
-            marginVertical: 5,
-          }}>
+        <View style={homestyles.listHeaderContainer}>
           <AppText text={'Daily Review'} weight="Medium" size={18} />
           <AppText
             text={'Sell All'}

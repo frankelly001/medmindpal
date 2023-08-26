@@ -39,19 +39,17 @@ const AuthNavHelper: FunctionComponent<{authType: 'sign_up' | 'sign_in'}> = ({
   ];
   return (
     <AppText
-      // text={['ALREADY HAVE AN ACCOUNT? LOG IN']}
       text={texts.map((el, i) => (
         <AppText
           key={i}
           text={el.text}
-          size={14}
+          size={12}
           color={el.color}
           weight="Regular"
           disabled={!el.routeName}
           onPress={() =>
             el.routeName ? navigation.navigate(el.routeName) : null
           }
-          style={{marginVertical: 20}}
         />
       ))}
       style={{marginVertical: 20}}

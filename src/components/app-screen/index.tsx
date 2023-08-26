@@ -1,15 +1,15 @@
-import React, {FunctionComponent} from 'react';
+import React from 'react';
 import {KeyboardAvoidingView, Platform, SafeAreaView} from 'react-native';
-import {ScrollView, Pressable, View} from 'react-native';
-import colors from '../../constants/colors';
+import {ScrollView, View} from 'react-native';
+import {appScreenStyles} from './styles';
 
-const AppScreen = ({children, scrollViewProps, forList = false}: any) => {
+const AppScreen = ({children, scrollViewProps}: any) => {
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{flex: 1}}>
+    <SafeAreaView style={appScreenStyles.flex1}>
+      <View style={appScreenStyles.flex1}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={{flex: 1}}>
+          style={appScreenStyles.flex1}>
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
             showsVerticalScrollIndicator={false}

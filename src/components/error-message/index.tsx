@@ -1,10 +1,8 @@
 import React, {FunctionComponent} from 'react';
 import AppText from '../app-text';
+import {errorMsgProps} from './type';
 
-const ErrorMessage: FunctionComponent<{
-  error?: boolean;
-  message?: string;
-}> = ({error, message}) => {
+const ErrorMessage: FunctionComponent<errorMsgProps> = ({error, message}) => {
   if (!error) return null;
 
   return (

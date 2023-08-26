@@ -19,7 +19,7 @@ const AuthType: FunctionComponent<ScreenProps> = ({navigation}) => {
         <View style={authTypeStyle.contentContainer}>
           <AppText
             text={'Your Personal Medication Companion'}
-            size={30}
+            size={24}
             color="text_1"
             weight="Medium"
             align="center"
@@ -28,7 +28,7 @@ const AuthType: FunctionComponent<ScreenProps> = ({navigation}) => {
             text={
               'Thousand of people are using medmindpal for medication reminder'
             }
-            size={16}
+            size={12}
             color="text_2"
             weight="Light"
             style={authTypeStyle.summaryText}

@@ -1,8 +1,6 @@
 import {FunctionComponent} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import AppButton from '../../../components/app-button';
-import Icon, {AppVectorIcons} from '../../../components/app-icons';
-import AppScreen from '../../../components/app-screen';
 import AppText from '../../../components/app-text';
 import {screenHeight, screenWidth} from '../../../config/const';
 import {BG1} from '../../../constants/all-svgs';
@@ -16,9 +14,9 @@ const Onboarding: FunctionComponent<ScreenProps> = ({navigation}) => {
       <View style={onboardingStyle.svgBg}>
         <BG1 width={screenWidth} height={screenHeight} />
       </View>
-      <SafeAreaView style={{flex: 1}}>
-        <View style={{padding: 20, flex: 1}}>
-          <View style={{marginTop: 50, flex: 1}}>
+      <SafeAreaView style={onboardingStyle.safeArea}>
+        <View style={onboardingStyle.contentContainer}>
+          <View style={onboardingStyle.introContainer}>
             <AppText
               text={'Welcome to'}
               size={26}
@@ -31,12 +29,12 @@ const Onboarding: FunctionComponent<ScreenProps> = ({navigation}) => {
               size={36}
               color="primary_1"
               weight="Light"
-              style={{marginVertical: 5}}
+              style={onboardingStyle.prodName}
               align="center"
             />
             <AppText
               text={
-                'Never Miss a pill again. Staying on top of your health routine is our priority'
+                'Never miss a pill again. Staying on top of your Health routine is our priority'
               }
               size={16}
               color="primary_1"

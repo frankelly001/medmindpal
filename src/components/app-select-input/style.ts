@@ -55,6 +55,10 @@ export const selectInputStyles = StyleSheet.create({
     fontSize: fontSz(14),
     lineHeight: fontSz(14) * 1.3,
   },
+  noValueText: {
+    color: colors.error_1,
+    textTransform: 'none',
+  },
   item: {
     padding: 15,
     flexDirection: 'row',

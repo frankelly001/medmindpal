@@ -1,43 +1,13 @@
 import React, {FunctionComponent, useRef, useState} from 'react';
-import {
-  View,
-  TextInput,
-  TextInputProps,
-  TouchableOpacity,
-  ViewStyle,
-  StyleSheet,
-} from 'react-native';
+import {View, TextInput, TouchableOpacity} from 'react-native';
 import Animated, {useAnimatedStyle, withSpring} from 'react-native-reanimated';
-import {SvgProps} from 'react-native-svg';
-import {fontSz, hp, TEXT_SIZE_TYPE} from '../../config/const';
+import {fontSz} from '../../config/const';
 import colors from '../../constants/colors';
 import {detectTouch} from '../../config/const';
 import {EyeIcon, EyeSlashIcon} from '../../constants/all-svgs';
 import AppText from '../app-text';
 import {inputStyles} from './styles';
-
-type inputType = {
-  editable?: boolean;
-  placeHolderColor?: string;
-  SuffixIcon?: React.FC<SvgProps>;
-  iconPressable?: boolean;
-  iconOnPress?: () => void;
-  placeHolder: string;
-  value: string;
-  onChangeText?: (text: string) => void;
-  contentContainerStyle?: ViewStyle;
-  TextInputStyle?: ViewStyle;
-  inputFontSize?: TEXT_SIZE_TYPE;
-  placeHolderFontSize?: number;
-  placeholderTextTransform?: 'lowercase' | 'capitalize' | 'none';
-  otherProps?: TextInputProps;
-  multiline?: boolean;
-  borderColor?: string;
-  onBlur?: () => void;
-  onFocus?: () => void;
-  valSymbol?: string | undefined;
-  borderWidth?: number;
-} & TextInputProps;
+import {inputType} from './type';
 
 const AppInput: FunctionComponent<inputType> = ({
   editable = true,
@@ -89,8 +59,8 @@ const AppInput: FunctionComponent<inputType> = ({
       style={[
         {
           ...inputStyles.container,
-          //   borderColor: isFocus ? colors['grey_dark_4'] : borderColor,
-          //   borderWidth: borderWidth,
+          borderColor: isFocus ? colors['secondary_1'] : borderColor,
+          borderWidth: borderWidth,
           opacity: editable ? 1 : 0.5,
         },
         contentContainerStyle,

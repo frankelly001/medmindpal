@@ -1,10 +1,8 @@
 import {FunctionComponent, useState} from 'react';
-import {Controller} from 'react-hook-form';
 import {View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {convertToTime} from '../../helpers/convertToReadableDate';
 import AppBtnInput from '../app-btn-input';
-import ErrorMessage from '../error-message';
 import {AppDatePickerProps} from './type';
 
 const AppDatePicker: FunctionComponent<AppDatePickerProps> = ({
@@ -29,7 +27,6 @@ const AppDatePicker: FunctionComponent<AppDatePickerProps> = ({
           labelFontSize={12}
           onPress={() => setOpen(true)}
         />
-        {/* <ErrorMessage error={!!error} message={errorMessage} /> */}
       </View>
       <DatePicker
         mode="date"

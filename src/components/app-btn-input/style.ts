@@ -9,10 +9,10 @@ export const inputBtnStyles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderRadius: 12,
-    // borderWidth: 1,
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: colors.input,
+    borderColor: colors.grey_light_4,
   },
 
   fontFamily: {

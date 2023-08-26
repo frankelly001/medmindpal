@@ -35,10 +35,7 @@ const AppBtnInput: FunctionComponent<BtnInputType> = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[
-        {...inputBtnStyles.container, borderColor: colors.grey_light_4},
-        style,
-      ]}>
+      style={[{...inputBtnStyles.container}, style]}>
       <View style={{flex: 1}}>
         <Animated.Text
           style={[

@@ -6,7 +6,7 @@ import {appBtnStyles} from './styles';
 import {appButtonProps} from './type';
 
 const AppButton: FunctionComponent<appButtonProps> = ({
-  text = 'button'.toUpperCase(),
+  text = 'BUTTON',
   textSize = 14,
   readonly,
   style,
@@ -24,7 +24,10 @@ const AppButton: FunctionComponent<appButtonProps> = ({
       style={[
         appBtnStyles.container,
         style,
-        {opacity: disabled ? 0.5 : 1, backgroundColor: colors[buttonColor]},
+        {
+          opacity: disabled ? 0.5 : 1,
+          backgroundColor: colors[buttonColor],
+        },
       ]}
       {...otherProps}>
       {LeftView && LeftView}

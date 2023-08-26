@@ -4,7 +4,7 @@ import colors from '../../../constants/colors';
 
 export const homestyles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 16,
   },
   welcomeCardContainer: {},
   planCardContainer: {
@@ -17,15 +17,28 @@ export const homestyles = StyleSheet.create({
     flexDirection: 'row',
   },
   planCardContent: {
-    // width: '30%',
     flex: 1,
     justifyContent: 'space-between',
+  },
+  bannerContainer: {width: '70%'},
+  mb10: {marginBottom: 10},
+  bannerSubContainer: {
+    position: 'absolute',
+    right: -60,
+    bottom: 0,
   },
   showMoreBtn: {
     borderBottomWidth: 2,
     alignSelf: 'flex-start',
     paddingBottom: 5,
     borderColor: colors.brown_1,
+  },
+  listHeaderContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 20,
+    marginVertical: 5,
   },
 });
 

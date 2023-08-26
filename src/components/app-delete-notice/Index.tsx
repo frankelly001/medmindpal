@@ -4,9 +4,8 @@ import colors from '../../constants/colors';
 import AppButton from '../app-button';
 import AppText from '../app-text';
 import ModalOverlay from '../modal-overlay';
+import {appDeleteNoticeStyles} from './styles';
 import {DeleteNoticeProps} from './type';
-
-const {width} = Dimensions.get('screen');
 
 const DeleteNotice: FunctionComponent<DeleteNoticeProps> = ({
   visible,
@@ -16,36 +15,23 @@ const DeleteNotice: FunctionComponent<DeleteNoticeProps> = ({
 }) => {
   return (
     <ModalOverlay visible={visible}>
-      <View
-        style={{
-          width: width * 0.85,
-          backgroundColor: colors.grey_light,
-          borderRadius: 20,
-          padding: 15,
-        }}>
+      <View style={appDeleteNoticeStyles.container}>
         <AppText
           text={noticeLabel}
           size={14}
-          style={{textAlign: 'center', marginBottom: 20}}
+          style={appDeleteNoticeStyles.noticeLabel}
         />
 
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
+        <View style={appDeleteNoticeStyles.btnContainer}>
           <AppButton
             text="Yes"
             textSize={12}
             buttonColor={'error_2'}
             textColor={'white'}
-            style={{
-              width: '48%',
-              paddingVertical: 15,
-              paddingHorizontal: 10,
-              borderRadius: 20,
-            }}
+            style={[
+              appDeleteNoticeStyles.button,
+              appDeleteNoticeStyles.yesButton,
+            ]}
             onPress={onDelete}
           />
           <AppButton
@@ -53,13 +39,10 @@ const DeleteNotice: FunctionComponent<DeleteNoticeProps> = ({
             textSize={12}
             buttonColor={'grey_dark'}
             textColor={'white'}
-            style={{
-              width: '48%',
-              paddingVertical: 15,
-              paddingHorizontal: 10,
-              borderRadius: 20,
-              backgroundColor: colors.grey_dark,
-            }}
+            style={[
+              appDeleteNoticeStyles.button,
+              appDeleteNoticeStyles.cancelButton,
+            ]}
             onPress={onCancel}
           />
         </View>

@@ -31,9 +31,6 @@ export default {
   brown_1: '#EC7669',
   yellos_light: '#F3F6C8',
 
-  // red_light: '#ff8591',
-  // red_dark: '#dc3545',
-
   grey_light: '#F4F2F4',
   grey_light_2: '#F8F8F6',
   grey_light_3: '#e5e5e5',
