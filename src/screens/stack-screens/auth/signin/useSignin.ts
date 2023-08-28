@@ -1,17 +1,21 @@
 import {useNavigation} from '@react-navigation/native';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {showToast} from '../../../../components/app-toast';
 import {routesNames} from '../../../../constants/routes';
 import {navigationProps} from '../../../../constants/types';
 import {useFormValidation} from '../../../../hooks/useFormValidation';
+import {authReset, signin} from '../../../../redux/auth/authSlice';
+import {storeState} from '../../../../redux/storeSliceType';
+import {setUser} from '../../../../redux/user/userSlice';
 import {siginVS} from './schema';
 import {signinFields} from './types';
 
 export const useSignin = () => {
-  const navigation = useNavigation() as navigationProps;
   const [values, setValues] = useState<{[key in signinFields]: string}>({
-    email: '',
-    password: '',
+    email: 'Frank@gmail.com',
+    password: 'Frank12',
   });
 
   const fields: {[key in 'name']: signinFields}[] = [
@@ -20,7 +24,22 @@ export const useSignin = () => {
   ];
 
   const {errors, isValid, validateField} = useFormValidation(siginVS);
-  const [loading, setLoading] = useState(false);
+  const dispatch: any = useDispatch();
+
+  const {signinFailed, signinSucess, message, loading, signinData} =
+    useSelector((state: storeState) => state.authReducer);
+
+  const {user} = useSelector((state: storeState) => state.userReducer);
+
+  console.log('check user', user);
+
+  useEffect(() => {
+    if (signinSucess) {
+      dispatch(setUser(signinData.profile));
+    }
+    if (message) showToast(signinSucess ? 'success' : 'error', message);
+    return () => dispatch(authReset());
+  }, [signinFailed, signinSucess, message]);
 
   const _handleChange = async (text: string, name: string) => {
     setValues(values => {
@@ -34,29 +53,10 @@ export const useSignin = () => {
   };
 
   const _handleSubmit = async () => {
-    try {
-      // if (!shouldValidate) setShouldValidate(true);
-      const valid = await isValid(values);
-      if (!valid) return Alert.alert('E no Valid');
-      setLoading(true);
-      Alert.alert('Success');
-      navigation.navigate(routesNames.SIGNUP);
-      // const data: any = await getVoter(
-      //   convertStringKeyValuesToLowercase(values),
-      // );
-      // await storeData(storageKeys.ACCOUNT_DATA, {
-      //   accountType: acctType.user,
-      //   data,
-      // });
-      // setUser(data);
-      // setAccountType(acctType.user);
-      // showToast('success', `Welcome ${data.fullname}`);
-    } catch (error: any) {
-      // showToast('error', error);
-      Alert.alert('Error', error);
-    } finally {
-      setLoading(false);
-    }
+    const valid = await isValid(values);
+    if (!valid) return;
+    const {email, password} = values;
+    dispatch(signin({email, password}));
   };
 
   return {values, _handleChange, _handleSubmit, errors, fields, loading};

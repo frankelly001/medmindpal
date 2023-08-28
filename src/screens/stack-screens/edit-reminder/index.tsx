@@ -1,301 +1,122 @@
-import {FunctionComponent, useState} from 'react';
-import {Alert, TouchableOpacity, View} from 'react-native';
-import DatePicker from 'react-native-date-picker';
-import AppBackBtn from '../../../components/app-back-btn';
+import {FunctionComponent} from 'react';
+import {View} from 'react-native';
 import AppButton from '../../../components/app-button';
-import Icon, {AppVectorIcons} from '../../../components/app-icons';
-
 import AppInput from '../../../components/app-input';
 import AppScreen from '../../../components/app-screen';
 import AppSelectInput from '../../../components/app-select-input';
 import AppText from '../../../components/app-text';
-import {wp} from '../../../config/const';
-import {
-  FoodPill1Icon,
-  FoodPill2Icon,
-  FoodPill3Icon,
-} from '../../../constants/all-svgs';
-import colors from '../../../constants/colors';
+import FoodPillTimePicker from '../../../components/app-time-picker';
+import ErrorMessage from '../../../components/error-message';
 import {ScreenProps} from '../../../constants/types';
-import {convertToTime} from '../../../helpers/convertToReadableDate';
-import {useFormValidation} from '../../../hooks/useFormValidation';
-import {editReminderVS} from './schema';
-import {editReminderFields, FoodPillTimePickerProps} from './type';
+import {editReminderStyles} from './styles';
+import {useEditReminder} from './useEditReminder';
 
-function createArrayNumList(length: number = 5, addBy: number = 1) {
-  return Array.from({length}, (_, index) => index + addBy).map(el => {
-    return {label: el.toString(), value: el.toString()};
-  });
-}
-
-const FoodPillTimePicker: FunctionComponent<FoodPillTimePickerProps> = ({
-  placeholder = 'placeholder',
-  date,
-  onChange = () => null,
-  align = 'center',
-  onDelete,
-}) => {
-  const [open, setOpen] = useState(false);
-
-  const Items = {
-    left: {
-      position: {right: -10},
-      Icon: FoodPill1Icon,
-    },
-    right: {
-      position: {left: -10},
-      Icon: FoodPill3Icon,
-    },
-    center: {
-      position: {right: 10, left: 10},
-      Icon: FoodPill2Icon,
-    },
-  };
-
-  const FoodPillIcon = Items[align].Icon;
-
-  return (
-    <>
-      <View
-        style={{
-          alignItems: 'center',
-          margin: 5,
-        }}>
-        <TouchableOpacity
-          onPress={() => setOpen(true)}
-          style={{
-            backgroundColor: colors.input,
-            padding: 20,
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 20,
-            marginBottom: 5,
-            borderWidth: 2,
-            borderColor: date ? colors.secondary_1 : colors.primary_1,
-          }}>
-          <FoodPillIcon
-            fill={date ? colors.secondary_1 : colors.text_2}
-            height={48}
-          />
-        </TouchableOpacity>
-        {date && (
-          <View
-            style={{
-              position: 'absolute',
-              flexDirection: 'row',
-              alignItems: 'center',
-              top: -10,
-              backgroundColor: colors.white,
-              padding: 5,
-              borderRadius: 10,
-              borderWidth: 2,
-              borderColor: colors.secondary_1,
-              ...(Items?.[align]?.position ?? {}),
-            }}>
-            <Icon
-              IconTag={AppVectorIcons.Ionicons}
-              name="notifications"
-              color={colors.secondary_1}
-              size={15}
-              style={{marginRight: 5}}
-            />
-            <AppText
-              text={convertToTime(date)}
-              align="center"
-              weight="Medium"
-            />
-          </View>
-        )}
-        <AppText text={placeholder} align="center" textTransform="capitalize" />
-        {date && (
-          <TouchableOpacity style={{marginTop: 10}} onPress={onDelete}>
-            <Icon
-              IconTag={AppVectorIcons.MaterialIcons}
-              name="delete"
-              color={colors.error_1}
-              size={25}
-              style={{marginRight: 5}}
-            />
-          </TouchableOpacity>
-        )}
-      </View>
-      <DatePicker
-        mode="time"
-        modal
-        open={open}
-        date={date ? date : new Date()}
-        onConfirm={newDate => {
-          setOpen(false);
-          onChange(newDate);
-        }}
-        onCancel={() => {
-          setOpen(false);
-        }}
-      />
-    </>
-  );
-};
-
-const EditReminder: FunctionComponent<ScreenProps> = ({navigation}) => {
-  const [values, setValues] = useState<{
-    pillName: string;
-    dosage: string;
-    timeOfDay: {name: 'morning' | 'noon' | 'night'; value: Date}[];
-  }>({
-    pillName: '',
-    dosage: '',
-    timeOfDay: [],
-  });
-
-  const field1: {
-    name: 'pillName';
-    textContentType?: 'password';
-    placeholder: string;
-  } = {name: 'pillName', placeholder: 'Pill name'};
-
-  const field2: {
-    name: 'dosage';
-    textContentType?: 'password';
-    placeholder?: string;
-  } = {name: 'dosage'};
-
-  const field3: {
-    name: 'morning' | 'noon' | 'night';
-    align: 'left' | 'center' | 'right';
-    textContentType?: 'password';
-    placeholder?: string;
-  }[] = [
-    {name: 'morning', align: 'left'},
-    {name: 'noon', align: 'center'},
-    {name: 'night', align: 'right'},
-  ];
-
-  const {errors, isValid, validateField} = useFormValidation(editReminderVS);
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = async (text: any, name: editReminderFields) => {
-    setValues(values => {
-      return {...values, [name]: text};
-    });
-    validateField({
-      values: {...values, [name]: text},
-      field: name,
-      initialize: true,
-    });
-  };
-
-  const submit = async () => {
-    try {
-      // if (!shouldValidate) setShouldValidate(true);
-      const valid = await isValid(values);
-      if (!valid) return Alert.alert('E no Valid');
-      setLoading(true);
-      Alert.alert('Success');
-      // const data: any = await getVoter(
-      //   convertStringKeyValuesToLowercase(values),
-      // );
-      // await storeData(storageKeys.ACCOUNT_DATA, {
-      //   accountType: acctType.user,
-      //   data,
-      // });
-      // setUser(data);
-      // setAccountType(acctType.user);
-      // showToast('success', `Welcome ${data.fullname}`);
-    } catch (error: any) {
-      // showToast('error', error);
-      Alert.alert('Error', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+const EditReminder: FunctionComponent<ScreenProps> = ({navigation, route}) => {
+  const {_handleChange, _handleSubmit, errors, field1, field2, field3, values} =
+    useEditReminder(route.params);
 
   return (
     <AppScreen>
-      <View style={{padding: 15}}>
-        {/* <AppText text={'Add Plan'} weight="SemiBold" size={28} color="text_1" /> */}
-        <View style={{marginVertical: 20}}>
+      <View style={editReminderStyles.container}>
+        <View style={editReminderStyles.allFieldContainer}>
           <AppText
             text={'Pills'}
             weight="Medium"
             size={15}
             color="text_1"
-            style={{marginBottom: 10, marginHorizontal: 10}}
+            style={editReminderStyles.allFieldLabel}
           />
-
-          <AppInput
-            placeHolder={field1.placeholder}
-            value={values[field1.name]}
-            onChangeText={text => handleChange(text, field1.name)}
-            contentContainerStyle={{margin: 5}}
-          />
+          <View key={field1.name} style={editReminderStyles.allField}>
+            <AppInput
+              placeHolder={field1.placeholder}
+              value={values[field1.name]}
+              onChangeText={text => _handleChange(text, field1.name)}
+            />
+            <ErrorMessage
+              error={!!errors?.[field1.name]}
+              message={errors?.[field1.name]?.message}
+            />
+          </View>
         </View>
-        <View style={{marginVertical: 10}}>
+        <View style={editReminderStyles.allFieldContainer}>
           <AppText
             text={'Amount & How long?'}
             weight="Medium"
             size={15}
             color="text_1"
-            style={{marginBottom: 10, marginHorizontal: 10}}
+            style={editReminderStyles.allFieldLabel}
           />
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <View key={field2.name} style={{margin: 5, flex: 1}}>
-              <AppSelectInput
-                placeHolder={field2?.placeholder ?? field2.name}
-                value={values[field2.name]}
-                data={createArrayNumList(10, 1)}
-                labelField={'lebel'}
-                valueField={'value'}
-                onChange={text => handleChange(text, field2.name)}
-              />
-            </View>
+          <View style={editReminderStyles.field2}>
+            {field2.map(item => (
+              <View key={item.name} style={editReminderStyles.allField}>
+                <AppSelectInput
+                  placeHolder={item?.placeholder ?? item.name}
+                  value={values[item.name]}
+                  data={item.data}
+                  labelField={'lebel'}
+                  valueField={'value'}
+                  onChange={text => _handleChange(text, item.name)}
+                />
+
+                <ErrorMessage
+                  error={!!errors?.[item.name]}
+                  message={errors?.[item.name]?.message}
+                />
+              </View>
+            ))}
           </View>
         </View>
-        <View style={{marginVertical: 10}}>
+        <View style={editReminderStyles.allFieldContainer}>
           <AppText
             text={'Food & Pills time'}
             weight="Medium"
             size={15}
             color="text_1"
-            style={{marginBottom: 20, marginHorizontal: 10}}
+            style={editReminderStyles.allFieldLabel}
           />
-          <View
-            style={{
-              flexDirection: 'row',
-              // alignItems: 'center',
-              justifyContent: 'space-between',
-            }}>
-            {field3.map(item => (
+          <View style={editReminderStyles.filed3}>
+            {field3.fields.map(item => (
               <FoodPillTimePicker
                 key={item.name}
                 placeholder={item.name}
                 align={item.align}
                 date={
-                  values?.timeOfDay?.find(el => el.name == item.name)?.value
+                  values?.[field3.name]?.find(el => el?.name == item?.name)
+                    ?.value
                 }
                 onDelete={() =>
-                  handleChange(
-                    values.timeOfDay.filter(el => el.name !== item.name),
-                    'timeOfDay',
+                  _handleChange(
+                    values?.[field3.name].filter(el => el.name !== item.name),
+                    field3.name,
                   )
                 }
                 onChange={date =>
-                  handleChange(
+                  _handleChange(
                     [
-                      ...values.timeOfDay.filter(el => el.name !== item.name),
+                      ...values?.[field3.name].filter(
+                        el => el.name !== item.name,
+                      ),
                       {name: item.name, value: date},
                     ],
-                    'timeOfDay',
+                    field3.name,
                   )
                 }
               />
             ))}
           </View>
+
+          <ErrorMessage
+            error={!!errors?.[field3.name]}
+            message={errors?.[field3.name]?.message}
+            align="center"
+          />
         </View>
         <AppButton
           text="Done"
           buttonColor={'secondary_1'}
           textColor="white"
-          style={{margin: 5, marginVertical: 30}}
+          style={editReminderStyles.submit}
+          onPress={_handleSubmit}
         />
       </View>
     </AppScreen>

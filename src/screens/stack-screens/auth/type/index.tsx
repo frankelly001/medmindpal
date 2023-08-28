@@ -36,13 +36,13 @@ const AuthType: FunctionComponent<ScreenProps> = ({navigation}) => {
           />
 
           <AppButton
-            text="SIGN IN"
+            text="SIGN UP"
             textColor="primary_1"
             buttonColor="secondary_1"
-            onPress={() => navigation.navigate(routesNames.SIGNIN)}
+            onPress={() => navigation.navigate(routesNames.SIGNUP)}
           />
 
-          <AuthNavHelper authType="sign_up" />
+          <AuthNavHelper authType="sign_in" />
         </View>
       </SafeAreaView>
     </View>

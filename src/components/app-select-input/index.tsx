@@ -25,6 +25,8 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
   placeHolderFontSize = 12,
   onFocus,
   onBlur,
+  borderColor = colors.grey_light_4,
+  borderWidth = 2,
   labelField = 'label',
   valueField = 'value',
   ...otherProps
@@ -57,7 +59,8 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
       style={[
         {
           ...selectInputStyles.container,
-          borderColor: colors[isFocus ? 'grey_dark_4' : 'grey_light_4'],
+          borderWidth,
+          borderColor: isFocus ? colors['secondary_1'] : borderColor,
         },
         contentContainerStyle,
       ]}

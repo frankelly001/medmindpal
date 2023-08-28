@@ -1,6 +1,13 @@
-import {useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {showToast} from '../../../../components/app-toast';
+import {routesNames} from '../../../../constants/routes';
+import {navigationProps} from '../../../../constants/types';
 import {useFormValidation} from '../../../../hooks/useFormValidation';
+import {authReset, signup} from '../../../../redux/auth/authSlice';
+import {storeState} from '../../../../redux/storeSliceType';
 import {sigupVS} from './schema';
 import {signupFields} from './types';
 
@@ -8,10 +15,10 @@ export const useSignup = () => {
   const [values, setValues] = useState<{
     [key in signupFields]: string;
   }>({
-    fullname: '',
-    email: '',
-    password: '',
-    confrimPassword: '',
+    fullname: 'Franklyn',
+    email: 'Frank@gmail.com',
+    password: 'Frank12',
+    confirmPassword: 'Frank12',
   });
 
   const fields: {
@@ -23,14 +30,32 @@ export const useSignup = () => {
     {name: 'email'},
     {name: 'password', textContentType: 'password'},
     {
-      name: 'confrimPassword',
+      name: 'confirmPassword',
       placeholder: 'Confrim Password',
       textContentType: 'password',
     },
   ];
 
+  const dispatch: any = useDispatch();
+
   const {errors, isValid, validateField} = useFormValidation(sigupVS);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  const {signupFailed, signupSucess, message, loading} = useSelector(
+    (state: storeState) => state.authReducer,
+  );
+
+  const navigation = useNavigation() as navigationProps;
+
+  console.log(signupFailed, signupSucess, message, loading);
+
+  useEffect(() => {
+    if (signupSucess) {
+      navigation.navigate(routesNames.SIGNIN);
+      console.log('yessssssss');
+    }
+    if (message) showToast(signupSucess ? 'success' : 'error', message);
+    return () => dispatch(authReset());
+  }, [signupFailed, signupSucess]);
 
   const _handleChange = async (text: string, name: string) => {
     setValues(values => {
@@ -44,28 +69,10 @@ export const useSignup = () => {
   };
 
   const _handkeSubmit = async () => {
-    try {
-      // if (!shouldValidate) setShouldValidate(true);
-      const valid = await isValid(values);
-      if (!valid) return Alert.alert('E no Valid');
-      setLoading(true);
-      Alert.alert('Success');
-      // const data: any = await getVoter(
-      //   convertStringKeyValuesToLowercase(values),
-      // );
-      // await storeData(storageKeys.ACCOUNT_DATA, {
-      //   accountType: acctType.user,
-      //   data,
-      // });
-      // setUser(data);
-      // setAccountType(acctType.user);
-      // showToast('success', `Welcome ${data.fullname}`);
-    } catch (error: any) {
-      // showToast('error', error);
-      Alert.alert('Error', error);
-    } finally {
-      setLoading(false);
-    }
+    const valid = await isValid(values);
+    if (!valid) return;
+    const {fullname, email, password} = values;
+    dispatch(signup({fullname, email, password}));
   };
 
   return {_handkeSubmit, _handleChange, errors, values, loading, fields};

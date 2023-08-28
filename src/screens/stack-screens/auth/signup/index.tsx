@@ -4,6 +4,7 @@ import AppBackBtn from '../../../../components/app-back-btn';
 import AppButton from '../../../../components/app-button';
 import Icon, {AppVectorIcons} from '../../../../components/app-icons';
 import AppInput from '../../../../components/app-input';
+import AppLoading from '../../../../components/app-loading';
 import AppScreen from '../../../../components/app-screen';
 import AppText from '../../../../components/app-text';
 import AuthNavHelper from '../../../../components/auth-nav-helper';
@@ -25,6 +26,7 @@ const Signup: FunctionComponent<ScreenProps> = ({navigation}) => {
 
   return (
     <View style={signupStyle.container}>
+      <AppLoading visible={loading} />
       <View style={signupStyle.svgBg}>
         <AuthBG width={screenWidth} />
       </View>
@@ -71,6 +73,7 @@ const Signup: FunctionComponent<ScreenProps> = ({navigation}) => {
                   onChangeText={(text: string) => _handleChange(text, el.name)}
                   placeHolder={el?.placeholder ?? el.name}
                   textContentType={el.textContentType}
+                  borderWidth={1}
                 />
                 <ErrorMessage
                   error={!!errors?.[el.name]}
@@ -79,7 +82,7 @@ const Signup: FunctionComponent<ScreenProps> = ({navigation}) => {
               </View>
             ))}
             <AppButton
-              onPress={() => navigation.navigate(routesNames.BOTTOM_TAB)}
+              onPress={_handkeSubmit}
               text="SIGN UP"
               textColor="primary_1"
               buttonColor="secondary_2"

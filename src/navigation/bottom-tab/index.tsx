@@ -3,6 +3,7 @@ import Icon, {AppVectorIcons} from '../../components/app-icons';
 import colors from '../../constants/colors';
 import {routesNames} from '../../constants/routes';
 import Home from '../../screens/bottom-tabs/home';
+import Profile from '../../screens/bottom-tabs/profile';
 import Reminders from '../../screens/bottom-tabs/reminders';
 
 const Tab = createBottomTabNavigator();
@@ -56,7 +57,7 @@ const BottomTab = () => {
       />
       <Tab.Screen
         name={routesNames.PROFILE}
-        component={Home}
+        component={Profile}
         options={{
           title: 'Profile',
 

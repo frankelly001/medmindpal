@@ -17,16 +17,16 @@ export const schema = {
 
   dosage: Yup.string()
     .required()
-    .min(1)
-    .max(2)
+    .min(1, 'Dosage must be at least 1 character long')
+    .max(2, 'Dosage can be at most 2 characters long')
     .label('Phone')
-    .matches(/^[0-9]+$/, 'Dosage must be only digits'),
-  days: Yup.string()
+    .matches(/^[0-9]+$/, 'Dosage is Required'),
+  repeatFrequency: Yup.string()
     .required()
-    .min(1)
+    .min(-1)
     .max(2)
     .label('Phone')
-    .matches(/^[0-9]+$/, 'Days must be only digits'),
+    .matches(/^-?\d+$/, 'Repeat frequency is Required'),
 
   timeOfDay: Yup.array().min(1, 'Please select at least one time of the Day'),
 };

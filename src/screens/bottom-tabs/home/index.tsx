@@ -1,18 +1,23 @@
 import {FunctionComponent} from 'react';
 import {Alert, TouchableOpacity, View} from 'react-native';
+import {useSelector} from 'react-redux';
 import Icon, {AppVectorIcons} from '../../../components/app-icons';
 import AppScreen from '../../../components/app-screen';
 import AppText from '../../../components/app-text';
+import {showToast} from '../../../components/app-toast';
 import {hp, wp} from '../../../config/const';
 import {BannerIcon, MedTabIcon} from '../../../constants/all-svgs';
 import colors from '../../../constants/colors';
+import {storeState} from '../../../redux/storeSliceType';
 import {cardStyles, homestyles} from './styles';
 
-const WelcomeCard: FunctionComponent = () => {
+const WelcomeCard: FunctionComponent<{welcomeName?: string}> = ({
+  welcomeName,
+}) => {
   return (
     <View style={homestyles.welcomeCardContainer}>
       <AppText text={'Hello,'} weight="SemiBold" size={28} />
-      <AppText text={'Franklyn'} weight="Regular" size={28} />
+      <AppText text={welcomeName} weight="Regular" size={28} />
       <View style={homestyles.planCardContainer}>
         <View style={homestyles.planCardContent}>
           <View>
@@ -82,10 +87,11 @@ const DailyTabCard = () => {
 };
 
 const Home: FunctionComponent = () => {
+  const {user} = useSelector((state: storeState) => state.userReducer);
   return (
     <AppScreen>
       <View style={homestyles.container}>
-        <WelcomeCard />
+        <WelcomeCard welcomeName={user?.fullname?.split(' ')[0]} />
 
         <View style={homestyles.listHeaderContainer}>
           <AppText text={'Daily Review'} weight="Medium" size={18} />
@@ -94,7 +100,7 @@ const Home: FunctionComponent = () => {
             weight="Regular"
             size={12}
             color="grey_dark_3"
-            onPress={() => Alert.alert('See All')}
+            onPress={() => showToast('success', 'See All')}
           />
         </View>
 

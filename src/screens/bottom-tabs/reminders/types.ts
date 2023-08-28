@@ -4,7 +4,7 @@ export type DailyTabCardProps = {
   dosage?: string;
   frequency?: string;
   pillName?: string;
-  timeOfDay?: {name: timeOfDay; value: Date}[];
+  timeOfDay?: {id: string; name: timeOfDay; value: Date}[];
   onPress?: () => void;
   onEditPress?: () => void;
   onDeletePress?: () => void;

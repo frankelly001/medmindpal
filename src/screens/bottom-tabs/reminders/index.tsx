@@ -1,5 +1,6 @@
 import {FunctionComponent, useState} from 'react';
 import {Alert, FlatList, TouchableOpacity, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import DeleteNotice from '../../../components/app-delete-notice/Index';
 import Icon, {AppVectorIcons} from '../../../components/app-icons';
 import AppText from '../../../components/app-text';
@@ -7,25 +8,18 @@ import {MedTabIcon} from '../../../constants/all-svgs';
 import colors from '../../../constants/colors';
 import {routesNames} from '../../../constants/routes';
 import {ScreenProps} from '../../../constants/types';
+import {convertToTime} from '../../../helpers/convertToReadableDate';
+import {storeState} from '../../../redux/storeSliceType';
+import {deleteReminder} from '../../../redux/user/userSlice';
 import {cardStyles, remindersStyles} from './styles';
 import {DailyTabCardProps} from './types';
-
-const dailyTab = {
-  dosage: '3',
-  frequency: '3',
-  pillName: 'Paracetamol',
-  timeOfDay: [
-    {name: 'night', value: ' 2023-08-25T20:05:09.000Z'},
-    {name: 'morning', value: '2023-08-25T09:57:42.000Z'},
-    {name: 'noon', value: '2023-08-25T09:57:42.000Z'},
-  ],
-};
+import {useReminders} from './useReminders';
 
 const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
-  dosage = dailyTab.dosage,
-  frequency = dailyTab.frequency,
-  pillName = dailyTab.pillName,
-  timeOfDay = dailyTab.timeOfDay,
+  dosage,
+  frequency,
+  pillName,
+  timeOfDay = [],
   onEditPress,
   onDeletePress,
   onPress,
@@ -36,7 +30,7 @@ const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
         <View style={cardStyles.contentContainer1}>
           <AppText text={pillName} weight="SemiBold" size={15} color="text_1" />
           {timeOfDay.map(item => (
-            <View key={item.name} style={cardStyles.contentContainer2}>
+            <View key={item.id} style={cardStyles.contentContainer2}>
               <AppText
                 text={[
                   <AppText
@@ -49,7 +43,7 @@ const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
                   />,
                   <AppText
                     key={1}
-                    text={'10:00 AM'}
+                    text={convertToTime(item.value)}
                     weight="SemiBold"
                     size={11}
                     color="grey_dark"
@@ -67,6 +61,7 @@ const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
               weight="SemiBold"
               size={12}
               color="grey_dark"
+              style={{marginTop: 3}}
             />
           </View>
         </View>
@@ -96,7 +91,15 @@ const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
 };
 
 const Reminders: FunctionComponent<ScreenProps> = ({navigation}) => {
-  const [showDeleteNotice, setShowsDeleteNotice] = useState(false);
+  const {
+    _handleCancel,
+    _handleConfirmDelete,
+    _handleShowDeleteModal,
+    reminders,
+    showDeleteNotice,
+    deleteReminderDetails,
+  } = useReminders();
+
   return (
     <View style={remindersStyles.container}>
       <DeleteNotice
@@ -109,7 +112,7 @@ const Reminders: FunctionComponent<ScreenProps> = ({navigation}) => {
           />,
           <AppText
             key={1}
-            text={`Paracetamol`}
+            text={deleteReminderDetails?.pillName}
             textTransform="capitalize"
             size={14}
             weight={'Medium'}
@@ -123,23 +126,29 @@ const Reminders: FunctionComponent<ScreenProps> = ({navigation}) => {
           />,
         ]}
         visible={showDeleteNotice}
-        onCancel={() => {
-          setShowsDeleteNotice(false);
-        }}
-        onDelete={() => {
-          Alert.alert('Deleted successsfully');
-          setShowsDeleteNotice(false);
-        }}
+        onCancel={_handleCancel}
+        onDelete={_handleConfirmDelete}
       />
       <FlatList
         showsVerticalScrollIndicator={false}
         contentContainerStyle={remindersStyles.listContainer}
-        data={[1, 2, 3, 4]}
-        keyExtractor={el => el.toString()}
+        data={reminders}
+        keyExtractor={el => el.id}
         renderItem={({item}) => (
           <DailyTabCard
-            onDeletePress={() => setShowsDeleteNotice(true)}
-            onEditPress={() => navigation.navigate(routesNames.EDIT_REMINDER)}
+            dosage={item.dosage}
+            pillName={item.pillName}
+            timeOfDay={item.timeOfDay}
+            onDeletePress={() =>
+              _handleShowDeleteModal({
+                pillName: item.pillName,
+                reminderId: item.id,
+                timeOfDay: item.timeOfDay,
+              })
+            }
+            onEditPress={() =>
+              navigation.navigate(routesNames.EDIT_REMINDER, item)
+            }
           />
         )}
       />

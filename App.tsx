@@ -1,50 +1,29 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
+import React, {useEffect} from 'react';
 import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import {useSelector} from 'react-redux';
-import {globalStoreSliceState} from './src/redux/global-store/type';
-import {storeSliceType} from './src/redux/storeSliceType';
+
+import {storeState} from './src/redux/storeSliceType';
 import {NavigationContainer} from '@react-navigation/native';
 import {navigationTheme} from './src/navigation/theme';
 import {navigationRef} from './src/navigation/rootNavigation';
 import MainNavigation from './src/navigation/main-navigation';
 import {Host} from 'react-native-portalize';
+import AppToast from './src/components/app-toast';
+import {LogBox} from 'react-native';
 
 function App(): JSX.Element {
-  const {user} = useSelector(
-    (state: storeSliceType) => state.globalStoreReducer,
-  );
+  LogBox.ignoreLogs([
+    'Using Math.random is not cryptographically secure! Use bcrypt.setRandomFallback to set a PRNG.',
+    'redux-persist failed to create sync storage',
+  ]);
 
   return (
     <NavigationContainer theme={navigationTheme} ref={navigationRef}>
-      {/* <SafeAreaView style={{flex: 1}}> */}
       <Host>
         <MainNavigation />
       </Host>
-      {/* </SafeAreaView> */}
+      <AppToast />
     </NavigationContainer>
   );
 }

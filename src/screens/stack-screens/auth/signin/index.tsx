@@ -4,6 +4,7 @@ import AppBackBtn from '../../../../components/app-back-btn';
 import AppButton from '../../../../components/app-button';
 import Icon, {AppVectorIcons} from '../../../../components/app-icons';
 import AppInput from '../../../../components/app-input';
+import AppLoading from '../../../../components/app-loading';
 import AppScreen from '../../../../components/app-screen';
 import AppText from '../../../../components/app-text';
 import AuthNavHelper from '../../../../components/auth-nav-helper';
@@ -21,6 +22,7 @@ const Signin: FunctionComponent<ScreenProps> = ({navigation}) => {
 
   return (
     <View style={signinStyle.container}>
+      <AppLoading visible={loading} />
       <View style={signinStyle.svgBg}>
         <AuthBG width={screenWidth} />
       </View>
@@ -66,6 +68,7 @@ const Signin: FunctionComponent<ScreenProps> = ({navigation}) => {
                   value={values[el.name]}
                   onChangeText={(text: string) => _handleChange(text, el.name)}
                   placeHolder={el.name}
+                  borderWidth={1}
                 />
                 <ErrorMessage
                   error={!!errors?.[el.name]}
@@ -74,7 +77,7 @@ const Signin: FunctionComponent<ScreenProps> = ({navigation}) => {
               </View>
             ))}
             <AppButton
-              onPress={() => navigation.navigate(routesNames.SIGNUP)}
+              onPress={_handleSubmit}
               text="SIGN IN"
               textColor="primary_1"
               buttonColor="secondary_2"

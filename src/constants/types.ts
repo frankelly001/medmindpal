@@ -7,6 +7,6 @@ export type navigationProps = StackNavigationProp<
 
 export type ScreenProps = {
   navigation: navigationProps;
-  route: Object;
+  route: any;
 };
 // | any;

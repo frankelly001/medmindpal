@@ -7,7 +7,7 @@ export const selectInputStyles = StyleSheet.create({
     height: hp(65),
     paddingVertical: 8,
     borderRadius: 12,
-    // borderWidth: 1,
+
     justifyContent: 'center',
     backgroundColor: colors.input,
   },

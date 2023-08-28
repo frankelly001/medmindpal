@@ -16,4 +16,6 @@ export type DinputType<T> = {
   labelField?: string;
   valueField?: string;
   onChange?: (text: string) => void;
+  borderColor?: string;
+  borderWidth?: number;
 } & DropdownProps<T>;

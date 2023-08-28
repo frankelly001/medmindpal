@@ -28,7 +28,7 @@ const AppInput: FunctionComponent<inputType> = ({
   multiline = false,
   valSymbol,
   borderColor = colors.grey_light_4,
-  borderWidth = 1,
+  borderWidth = 2,
   textContentType,
   ...otherProps
 }) => {
@@ -60,7 +60,7 @@ const AppInput: FunctionComponent<inputType> = ({
         {
           ...inputStyles.container,
           borderColor: isFocus ? colors['secondary_1'] : borderColor,
-          borderWidth: borderWidth,
+          borderWidth,
           opacity: editable ? 1 : 0.5,
         },
         contentContainerStyle,

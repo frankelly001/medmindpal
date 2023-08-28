@@ -5,12 +5,14 @@ import {persistReducer} from 'redux-persist';
 import thunk from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {LogBox} from 'react-native';
-import {globalStoreReducer} from './global-store/globalStoreSlice';
+import {userReducer} from './user/userSlice';
+import {authReducer} from './auth/authSlice';
 // import {logThis} from '../helpers';
 
 LogBox.ignoreLogs(['Require cycle:']);
 const reducers = combineReducers({
-  globalStoreReducer,
+  userReducer,
+  authReducer,
 });
 
 const persistConfig: any = {

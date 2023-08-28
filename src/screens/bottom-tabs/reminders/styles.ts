@@ -28,7 +28,11 @@ export const cardStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  contentContainer1: {paddingRight: 20, flex: 1},
+  contentContainer1: {
+    paddingRight: 20,
+    flex: 1,
+    justifyContent: 'space-between',
+  },
   contentContainer2: {
     flexDirection: 'row',
     alignItems: 'center',
