@@ -1,23 +1,23 @@
-import {RepeatFrequency} from '@notifee/react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
-import {Alert} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {FoodPillTimePickerAlign} from '../../../components/app-time-picker/type';
 import {showToast} from '../../../components/app-toast';
-import {createArrayNumList} from '../../../helpers/create';
+import {createArrayNumList} from '../../../helpers/createArrayNumList';
 import {
+  cancelAllTriggeredNotification,
   createTriggerNotification,
   repeatFrequencyData,
 } from '../../../helpers/notification';
 import {generateUniqueId} from '../../../helpers/generateUniqe';
 import {useFormValidation} from '../../../hooks/useFormValidation';
-import {createReminder} from '../../../redux/user/userSlice';
+import {deleteReminder, editReminder} from '../../../redux/user/userSlice';
 import {editReminderVS} from './schema';
 import {editReminderFields, timeOfDay} from './type';
 import {storeState} from '../../../redux/storeSliceType';
 import {convertToTime} from '../../../helpers/convertToReadableDate';
 import {reminder} from '../../../redux/user/type';
+import {getChangedProperties} from '../../../helpers/getChangedProperties';
 
 export const useEditReminder = (reminder: reminder) => {
   const initialValues = {
@@ -29,8 +29,6 @@ export const useEditReminder = (reminder: reminder) => {
         return {...el, value: new Date(el.value)};
       }) ?? [],
   };
-
-  console.log(reminder?.timeOfDay);
 
   const [values, setValues] = useState<{
     pillName: string;
@@ -89,17 +87,24 @@ export const useEditReminder = (reminder: reminder) => {
     });
   };
 
+  const valuesChanged = getChangedProperties(initialValues, values);
+
   const _handleSubmit = async () => {
     try {
       const valid = await isValid(values);
-      if (!valid) return;
+      if (!valid && !valuesChanged) return;
+
       setLoading(true);
-      const id: any = generateUniqueId();
       const timeOfDayTriggeredAlarm: {
         id: string;
         name: timeOfDay;
         value: Date;
       }[] = [];
+
+      dispatch(deleteReminder(reminder?.id ?? ''));
+      const notificationIds = reminder?.timeOfDay.map(el => el.id);
+      await cancelAllTriggeredNotification(notificationIds);
+
       for (let i = 0; i < values.timeOfDay.length; i++) {
         try {
           const id: any = await generateUniqueId();
@@ -122,12 +127,13 @@ export const useEditReminder = (reminder: reminder) => {
         }
       }
 
-      const payload = {
+      const payload: reminder = {
+        id: reminder.id,
         ...values,
         timeOfDay: timeOfDayTriggeredAlarm,
       };
-      dispatch(createReminder({id, ...payload}));
-      showToast('success', `Reminder created`);
+      dispatch(editReminder(payload));
+      showToast('success', `Reminder updated successfully`);
       navigation.goBack();
     } catch (error: any) {
       showToast('error', error);
@@ -143,6 +149,7 @@ export const useEditReminder = (reminder: reminder) => {
     errors,
     values,
     loading,
+    valuesChanged,
     _handleSubmit,
     _handleChange,
   };

@@ -9,4 +9,3 @@ export type ScreenProps = {
   navigation: navigationProps;
   route: any;
 };
-// | any;

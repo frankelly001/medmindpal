@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import colors from '../../constants/colors';
 import AppText from '../app-text';
 import {appBtnStyles} from './styles';

@@ -18,7 +18,7 @@ const signin = async (payload: signinPayload) => {
           message: `Welcome ${profile.fullname}`,
           data: userData,
         });
-      }, 3e3);
+      }, 2e3);
     } catch (error) {
       reject(error);
     }
@@ -48,7 +48,7 @@ const signup = async (payload: signupPayload) => {
           reminders: [],
         });
         return resolve({message: 'Account created successfully', data: null});
-      }, 3e3);
+      }, 2e3);
     } catch (error) {
       reject(error);
     }

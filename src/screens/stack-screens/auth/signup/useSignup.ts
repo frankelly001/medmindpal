@@ -1,6 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
 import {useEffect, useState} from 'react';
-import {Alert} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {showToast} from '../../../../components/app-toast';
 import {routesNames} from '../../../../constants/routes';
@@ -39,19 +38,15 @@ export const useSignup = () => {
   const dispatch: any = useDispatch();
 
   const {errors, isValid, validateField} = useFormValidation(sigupVS);
-  // const [loading, setLoading] = useState(false);
   const {signupFailed, signupSucess, message, loading} = useSelector(
     (state: storeState) => state.authReducer,
   );
 
   const navigation = useNavigation() as navigationProps;
 
-  console.log(signupFailed, signupSucess, message, loading);
-
   useEffect(() => {
     if (signupSucess) {
       navigation.navigate(routesNames.SIGNIN);
-      console.log('yessssssss');
     }
     if (message) showToast(signupSucess ? 'success' : 'error', message);
     return () => dispatch(authReset());

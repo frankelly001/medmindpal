@@ -35,7 +35,7 @@ const AppToastView: FunctionComponent<appToastViewProps> = ({
   const toastColors = {
     [toastTypes.SUCCESS]: colors.green,
     [toastTypes.ERROR]: colors.error_1,
-    [toastTypes.INFO]: colors.black,
+    [toastTypes.INFO]: colors.secondary_1,
   };
 
   return (

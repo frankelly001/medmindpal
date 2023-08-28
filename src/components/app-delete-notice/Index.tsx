@@ -1,9 +1,8 @@
 import React, {FunctionComponent} from 'react';
-import {Dimensions, View} from 'react-native';
-import colors from '../../constants/colors';
+import {View} from 'react-native';
 import AppButton from '../app-button';
 import AppText from '../app-text';
-import ModalOverlay from '../modal-overlay';
+import ModalOverlay from '../app-modal-overlay';
 import {appDeleteNoticeStyles} from './styles';
 import {DeleteNoticeProps} from './type';
 

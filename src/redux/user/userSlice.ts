@@ -36,10 +36,13 @@ export const deleteReminder =
   };
 
 export const editReminder =
-  (reminderId: string) => async (dispatch: any, getState: () => storeState) => {
+  (reminder: reminder) => async (dispatch: any, getState: () => storeState) => {
     const {reminders, user} = getState().userReducer;
     if (user) {
-      const newReminders = reminders.filter(el => el.id !== reminderId);
+      const newReminders = [
+        reminder,
+        ...reminders.filter(el => el.id !== reminder.id),
+      ];
       await localStorage.store(user?.email.toLowerCase(), {
         profile: user,
         reminders: newReminders,

@@ -5,6 +5,7 @@ export const appTimePickerStyles = StyleSheet.create({
   container: {
     alignItems: 'center',
     margin: 5,
+    flex: 1,
   },
   button: {
     backgroundColor: colors.input,

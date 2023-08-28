@@ -74,6 +74,7 @@ const AddReminder: FunctionComponent<ScreenProps> = ({navigation}) => {
             color="text_1"
             style={addReminderStyles.allFieldLabel}
           />
+
           <View style={addReminderStyles.filed3}>
             {field3.fields.map(item => (
               <FoodPillTimePicker

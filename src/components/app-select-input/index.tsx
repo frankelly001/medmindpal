@@ -71,12 +71,7 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
       }}>
       <Animated.Text
         style={[
-          {
-            paddingHorizontal: 16,
-            color: placeHolderColor,
-            paddingRight: 30,
-            textTransform: 'capitalize',
-          },
+          {...selectInputStyles.animatedPLaceHolder, color: placeHolderColor},
           placeholderStyle,
         ]}>
         {placeHolderTitle}
@@ -99,20 +94,7 @@ const AppSelectInput: FunctionComponent<DinputType<any>> = ({
         search={enableSearchInput}
         maxHeight={300}
         showsVerticalScrollIndicator={false}
-        containerStyle={{
-          borderRadius: 10,
-          overflow: 'hidden',
-          backgroundColor: colors.white,
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 6,
-          },
-          shadowOpacity: 0.37,
-          shadowRadius: 7.49,
-
-          elevation: 12,
-        }}
+        containerStyle={selectInputStyles.dropdownContainer}
         onBlur={() => {
           isFocus && setIsFocus(false);
           onBlur;

@@ -1,4 +1,4 @@
-import {FunctionComponent, useEffect, useState} from 'react';
+import {FunctionComponent, useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {wp} from '../../config/const';

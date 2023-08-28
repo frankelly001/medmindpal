@@ -7,7 +7,6 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {LogBox} from 'react-native';
 import {userReducer} from './user/userSlice';
 import {authReducer} from './auth/authSlice';
-// import {logThis} from '../helpers';
 
 LogBox.ignoreLogs(['Require cycle:']);
 const reducers = combineReducers({

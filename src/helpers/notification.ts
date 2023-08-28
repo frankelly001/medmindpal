@@ -6,11 +6,6 @@ import notifee, {
 } from '@notifee/react-native';
 import {showToast} from '../components/app-toast';
 
-// cancelAllNotifications(notificationIds?: string[]): Promise<void>;
-// cancelTriggerNotifications(notificationIds?: string[]): Promise<void>;
-
-// notifee.cancelTriggerNotification(notificationId: string): Promise<void>;
-
 export const createTriggerNotification = async ({
   message,
   time,

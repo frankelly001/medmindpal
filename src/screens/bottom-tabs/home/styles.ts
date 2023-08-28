@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {screenHeight, wp} from '../../../config/const';
+import {wp} from '../../../config/const';
 import colors from '../../../constants/colors';
 
 export const homestyles = StyleSheet.create({

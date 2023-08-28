@@ -3,7 +3,7 @@ import {SafeAreaView, View} from 'react-native';
 import AppButton from '../../../../components/app-button';
 import AppText from '../../../../components/app-text';
 import AuthNavHelper from '../../../../components/auth-nav-helper';
-import {COLOR_TYPES, screenHeight, screenWidth} from '../../../../config/const';
+import {screenWidth} from '../../../../config/const';
 import {BG2} from '../../../../constants/all-svgs';
 import {routesNames} from '../../../../constants/routes';
 import {ScreenProps} from '../../../../constants/types';

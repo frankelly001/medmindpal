@@ -1,5 +1,5 @@
-import {FunctionComponent, useState} from 'react';
-import {Alert, SafeAreaView, TouchableOpacity, View} from 'react-native';
+import {FunctionComponent} from 'react';
+import {View} from 'react-native';
 import AppBackBtn from '../../../../components/app-back-btn';
 import AppButton from '../../../../components/app-button';
 import Icon, {AppVectorIcons} from '../../../../components/app-icons';
@@ -11,13 +11,8 @@ import AuthNavHelper from '../../../../components/auth-nav-helper';
 import ErrorMessage from '../../../../components/error-message';
 import {screenWidth} from '../../../../config/const';
 import {AuthBG, GoogleIcon} from '../../../../constants/all-svgs';
-import colors from '../../../../constants/colors';
-import {routesNames} from '../../../../constants/routes';
 import {ScreenProps} from '../../../../constants/types';
-import {useFormValidation} from '../../../../hooks/useFormValidation';
-import {sigupVS} from './schema';
 import {signupStyle} from './styles';
-import {signupFields} from './types';
 import {useSignup} from './useSignup';
 
 const Signup: FunctionComponent<ScreenProps> = ({navigation}) => {

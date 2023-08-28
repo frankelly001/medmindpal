@@ -6,7 +6,6 @@ export const appToastViewStyles = StyleSheet.create({
   container: {
     height: 50,
     width: '100%',
-    // margin: 10,
     backgroundColor: 'transparent',
     paddingHorizontal: 20,
   },

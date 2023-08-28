@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {AnyObjectSchema, ObjectSchema} from 'yup';
+import {AnyObjectSchema} from 'yup';
 import {fieldValidation} from '../helpers/fieldValidation';
 import {validate} from '../helpers/validate';
 

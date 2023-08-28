@@ -1,5 +1,5 @@
 import {FunctionComponent} from 'react';
-import {Alert, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import Icon, {AppVectorIcons} from '../../../components/app-icons';
 import AppScreen from '../../../components/app-screen';
@@ -100,7 +100,7 @@ const Home: FunctionComponent = () => {
             weight="Regular"
             size={12}
             color="grey_dark_3"
-            onPress={() => showToast('success', 'See All')}
+            onPress={() => showToast('info', 'See All')}
           />
         </View>
 

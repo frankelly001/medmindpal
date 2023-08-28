@@ -24,6 +24,20 @@ export const selectInputStyles = StyleSheet.create({
 
     paddingHorizontal: 16,
   },
+  dropdownContainer: {
+    borderRadius: 10,
+    overflow: 'hidden',
+    backgroundColor: colors.white,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+
+    elevation: 12,
+  },
   icon: {
     marginRight: 5,
   },
@@ -64,5 +78,10 @@ export const selectInputStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  animatedPLaceHolder: {
+    paddingHorizontal: 16,
+    paddingRight: 30,
+    textTransform: 'capitalize',
   },
 });

@@ -27,7 +27,6 @@ const BottomTab = () => {
         options={{
           title: 'Home',
           headerTitle: 'Dashboard',
-          //   headerShown: false,
           tabBarIcon: ({color, size}) => (
             <Icon
               IconTag={AppVectorIcons.MaterialIcons}
@@ -44,11 +43,11 @@ const BottomTab = () => {
         options={{
           title: 'Reminders',
           headerTitle: 'Reminders',
-          //   headerShown: false,
+
           tabBarIcon: ({color, size}) => (
             <Icon
-              IconTag={AppVectorIcons.Fontisto}
-              name="nav-icon-list-a"
+              IconTag={AppVectorIcons.Ionicons}
+              name="calendar"
               color={color}
               size={size}
             />

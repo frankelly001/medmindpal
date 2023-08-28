@@ -1,4 +1,4 @@
-import React, {FunctionComponent, ReactNode} from 'react';
+import React, {FunctionComponent} from 'react';
 import {StyleSheet} from 'react-native';
 import {Portal} from 'react-native-portalize';
 import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';

@@ -1,9 +1,4 @@
-import React, {useEffect} from 'react';
-import type {PropsWithChildren} from 'react';
-
-import {useSelector} from 'react-redux';
-
-import {storeState} from './src/redux/storeSliceType';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {navigationTheme} from './src/navigation/theme';
 import {navigationRef} from './src/navigation/rootNavigation';

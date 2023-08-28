@@ -1,6 +1,5 @@
-import {FunctionComponent, useState} from 'react';
-import {Alert, FlatList, TouchableOpacity, View} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {FunctionComponent} from 'react';
+import {FlatList, TouchableOpacity, View} from 'react-native';
 import DeleteNotice from '../../../components/app-delete-notice/Index';
 import Icon, {AppVectorIcons} from '../../../components/app-icons';
 import AppText from '../../../components/app-text';
@@ -9,15 +8,15 @@ import colors from '../../../constants/colors';
 import {routesNames} from '../../../constants/routes';
 import {ScreenProps} from '../../../constants/types';
 import {convertToTime} from '../../../helpers/convertToReadableDate';
-import {storeState} from '../../../redux/storeSliceType';
-import {deleteReminder} from '../../../redux/user/userSlice';
+import {repeatFrequency} from '../../../helpers/notification';
+import {reverseLookup} from '../../../helpers/reverseLookup';
 import {cardStyles, remindersStyles} from './styles';
 import {DailyTabCardProps} from './types';
 import {useReminders} from './useReminders';
 
 const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
   dosage,
-  frequency,
+  repeatFrequency: frequencyRepeat,
   pillName,
   timeOfDay = [],
   onEditPress,
@@ -25,7 +24,7 @@ const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
   onPress,
 }) => {
   return (
-    <View style={cardStyles.container}>
+    <TouchableOpacity style={cardStyles.container} onPress={onPress}>
       <View style={cardStyles.subContainer1}>
         <View style={cardStyles.contentContainer1}>
           <AppText text={pillName} weight="SemiBold" size={15} color="text_1" />
@@ -61,8 +60,15 @@ const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
               weight="SemiBold"
               size={12}
               color="grey_dark"
-              style={{marginTop: 3}}
             />
+            {frequencyRepeat && (
+              <AppText
+                text={reverseLookup(repeatFrequency, +frequencyRepeat)}
+                weight="SemiBold"
+                size={12}
+                color="grey_dark"
+              />
+            )}
           </View>
         </View>
       </View>
@@ -86,7 +92,7 @@ const DailyTabCard: FunctionComponent<DailyTabCardProps> = ({
           />
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -134,23 +140,30 @@ const Reminders: FunctionComponent<ScreenProps> = ({navigation}) => {
         contentContainerStyle={remindersStyles.listContainer}
         data={reminders}
         keyExtractor={el => el.id}
-        renderItem={({item}) => (
-          <DailyTabCard
-            dosage={item.dosage}
-            pillName={item.pillName}
-            timeOfDay={item.timeOfDay}
-            onDeletePress={() =>
-              _handleShowDeleteModal({
-                pillName: item.pillName,
-                reminderId: item.id,
-                timeOfDay: item.timeOfDay,
-              })
-            }
-            onEditPress={() =>
-              navigation.navigate(routesNames.EDIT_REMINDER, item)
-            }
-          />
-        )}
+        renderItem={({item}) => {
+          const stringifiedReminder: any = JSON.stringify(item);
+          return (
+            <DailyTabCard
+              dosage={item.dosage}
+              pillName={item.pillName}
+              timeOfDay={item.timeOfDay}
+              repeatFrequency={item.repeatFrequency}
+              onDeletePress={() =>
+                _handleShowDeleteModal({
+                  pillName: item.pillName,
+                  reminderId: item.id,
+                  timeOfDay: item.timeOfDay,
+                })
+              }
+              onEditPress={() =>
+                navigation.navigate(
+                  routesNames.EDIT_REMINDER,
+                  stringifiedReminder,
+                )
+              }
+            />
+          );
+        }}
       />
       <TouchableOpacity
         onPress={() => navigation.navigate(routesNames.ADD_REMINDER)}

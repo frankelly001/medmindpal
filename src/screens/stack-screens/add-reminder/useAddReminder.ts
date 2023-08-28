@@ -1,11 +1,9 @@
-import {RepeatFrequency} from '@notifee/react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
-import {Alert} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {FoodPillTimePickerAlign} from '../../../components/app-time-picker/type';
 import {showToast} from '../../../components/app-toast';
-import {createArrayNumList} from '../../../helpers/create';
+import {createArrayNumList} from '../../../helpers/createArrayNumList';
 import {
   createTriggerNotification,
   repeatFrequencyData,
@@ -119,7 +117,7 @@ export const useAddReminder = () => {
         timeOfDay: timeOfDayTriggeredAlarm,
       };
       dispatch(createReminder({id, ...payload}));
-      showToast('success', `Reminder created`);
+      showToast('success', `Reminder created successfully`);
       navigation.goBack();
     } catch (error: any) {
       showToast('error', error);

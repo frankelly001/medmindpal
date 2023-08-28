@@ -12,8 +12,16 @@ import {editReminderStyles} from './styles';
 import {useEditReminder} from './useEditReminder';
 
 const EditReminder: FunctionComponent<ScreenProps> = ({navigation, route}) => {
-  const {_handleChange, _handleSubmit, errors, field1, field2, field3, values} =
-    useEditReminder(route.params);
+  const {
+    _handleChange,
+    _handleSubmit,
+    errors,
+    field1,
+    field2,
+    field3,
+    values,
+    valuesChanged,
+  } = useEditReminder(JSON.parse(route?.params));
 
   return (
     <AppScreen>
@@ -113,6 +121,7 @@ const EditReminder: FunctionComponent<ScreenProps> = ({navigation, route}) => {
         </View>
         <AppButton
           text="Done"
+          disabled={!valuesChanged}
           buttonColor={'secondary_1'}
           textColor="white"
           style={editReminderStyles.submit}

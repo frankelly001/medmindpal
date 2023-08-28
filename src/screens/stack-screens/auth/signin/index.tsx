@@ -11,7 +11,6 @@ import AuthNavHelper from '../../../../components/auth-nav-helper';
 import ErrorMessage from '../../../../components/error-message';
 import {screenWidth} from '../../../../config/const';
 import {AuthBG, GoogleIcon} from '../../../../constants/all-svgs';
-import {routesNames} from '../../../../constants/routes';
 import {ScreenProps} from '../../../../constants/types';
 import {signinStyle} from './styles';
 import {useSignin} from './useSignin';

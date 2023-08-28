@@ -1,10 +1,6 @@
-import {useNavigation} from '@react-navigation/native';
 import {useEffect, useState} from 'react';
-import {Alert} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {showToast} from '../../../../components/app-toast';
-import {routesNames} from '../../../../constants/routes';
-import {navigationProps} from '../../../../constants/types';
 import {useFormValidation} from '../../../../hooks/useFormValidation';
 import {authReset, signin} from '../../../../redux/auth/authSlice';
 import {storeState} from '../../../../redux/storeSliceType';
@@ -30,8 +26,6 @@ export const useSignin = () => {
     useSelector((state: storeState) => state.authReducer);
 
   const {user} = useSelector((state: storeState) => state.userReducer);
-
-  console.log('check user', user);
 
   useEffect(() => {
     if (signinSucess) {
