@@ -14,10 +14,10 @@ export const useSignup = () => {
   const [values, setValues] = useState<{
     [key in signupFields]: string;
   }>({
-    fullname: 'Franklyn',
-    email: 'Frank@gmail.com',
-    password: 'Frank12',
-    confirmPassword: 'Frank12',
+    fullname: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const fields: {

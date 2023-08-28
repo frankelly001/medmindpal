@@ -10,8 +10,8 @@ import {signinFields} from './types';
 
 export const useSignin = () => {
   const [values, setValues] = useState<{[key in signinFields]: string}>({
-    email: 'Frank@gmail.com',
-    password: 'Frank12',
+    email: '',
+    password: '',
   });
 
   const fields: {[key in 'name']: signinFields}[] = [
